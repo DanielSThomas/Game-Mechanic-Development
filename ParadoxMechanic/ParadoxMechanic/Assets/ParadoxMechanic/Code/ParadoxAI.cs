@@ -26,21 +26,21 @@ public class ParadoxAI : MonoBehaviour
     IEnumerator Movement()
     {
         for(; ; )
-        {
-            try
+        { 
+
+            if(localRecordedPoints.Count > 1)
             {
                 transform.position = localRecordedPoints[0];
-                
+
                 localRecordedPoints.RemoveAt(0);
-
-                
-
             }
-           catch
+            else
             {
                 StopCoroutine("Movement");
             }
+
             yield return new WaitForSeconds(0.02f);
+
         }
 
     }
