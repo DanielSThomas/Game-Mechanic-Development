@@ -30,14 +30,17 @@ public class ParadoxAI : MonoBehaviour
             try
             {
                 transform.position = localRecordedPoints[0];
-                localRecordedPoints.RemoveAt(0);
                 
+                localRecordedPoints.RemoveAt(0);
+
+                
+
             }
            catch
             {
                 StopCoroutine("Movement");
             }
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.02f);
         }
 
     }
