@@ -27,11 +27,11 @@ public class ParadoxAI : MonoBehaviour
     {
         for(; ; )
         {
-            foreach (Vector3 point in localRecordedPoints)
-            {
-                transform.Translate(point.x, point.y, point.z);
-                yield return new WaitForSeconds(1);
-            }
+
+            transform.position = localRecordedPoints[0];
+            localRecordedPoints.RemoveAt(0);
+            yield return new WaitForSeconds(0.05f);
+            
         }
 
     }
