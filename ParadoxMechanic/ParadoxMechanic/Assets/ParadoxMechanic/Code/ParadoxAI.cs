@@ -27,11 +27,17 @@ public class ParadoxAI : MonoBehaviour
     {
         for(; ; )
         {
-
-            transform.position = localRecordedPoints[0];
-            localRecordedPoints.RemoveAt(0);
+            try
+            {
+                transform.position = localRecordedPoints[0];
+                localRecordedPoints.RemoveAt(0);
+                
+            }
+           catch
+            {
+                StopCoroutine("Movement");
+            }
             yield return new WaitForSeconds(0.05f);
-            
         }
 
     }

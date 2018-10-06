@@ -6,7 +6,7 @@ public class PlayerRecording : MonoBehaviour
 {
 
     [SerializeField] private List<Vector3> recordedPoints;
-    [SerializeField] private Vector3 point;
+    private Vector3 point;
     [SerializeField] private float recordAccuracy;
     [SerializeField] private float maxPoints;
 
