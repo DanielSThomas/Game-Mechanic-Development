@@ -23,8 +23,9 @@ GameObject:
   - component: {fileID: 23110390776593002}
   - component: {fileID: 136601205640513256}
   - component: {fileID: 54225030715658198}
+  - component: {fileID: 114132883704032166}
   m_Layer: 0
-  m_Name: Player 1
+  m_Name: Paradox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1309610320390282}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 11.332475, y: 2, z: -1.886502}
+  m_LocalPosition: {x: 13.397171, y: 2, z: -4.8041058}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -100,6 +101,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &114132883704032166
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1309610320390282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 924d4559d650dfd48a0688c593fbf1a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &136601205640513256
 CapsuleCollider:
   m_ObjectHideFlags: 1

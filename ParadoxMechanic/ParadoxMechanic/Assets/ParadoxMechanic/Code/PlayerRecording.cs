@@ -9,6 +9,8 @@ public class PlayerRecording : MonoBehaviour
     [SerializeField] private Vector3 point;
     [SerializeField] private float recordAccuracy;
 
+    public List<Vector3> recordedPointsCopy;
+    
     // Use this for initialization
     void Start ()
     {
@@ -21,6 +23,7 @@ public class PlayerRecording : MonoBehaviour
 		
 	}
 
+
     IEnumerator RecordPoints()
     {
         for(; ; )
@@ -32,6 +35,8 @@ public class PlayerRecording : MonoBehaviour
             yield return new WaitForSeconds(recordAccuracy);
 
             Debug.DrawRay(point, transform.up, Color.red, 10);
+
+            recordedPointsCopy = recordedPoints;
         }
         
     }
