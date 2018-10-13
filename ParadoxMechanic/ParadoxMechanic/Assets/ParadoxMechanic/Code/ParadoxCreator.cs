@@ -8,21 +8,26 @@ public class ParadoxCreator : MonoBehaviour
     [SerializeField]private GameObject instanciateOB;
     [SerializeField]private Transform instanciateLocation;
     [SerializeField]private float lifeTime;
-
+    
 	// Use this for initialization
 	void Start ()
     {
-		
-	}
+
+        
+    }
 	
 	// Update is called once per frame
 	void Update ()
     {
-		if(Input.GetMouseButtonDown(1))
-        {
-            InstanciateObject();
-        }
+       
+       
+            
 	}
+
+    public void CreateClone()
+    {
+        InstanciateObject();
+    }
 
     private void InstanciateObject()
     {

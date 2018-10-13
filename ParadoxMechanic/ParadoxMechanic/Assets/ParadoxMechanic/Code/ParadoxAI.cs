@@ -16,10 +16,7 @@ public class ParadoxAI : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        //foreach (Vector3 point in localRecordedPoints)
-        //{
-        //    transform.Translate(point.x, point.y, point.z);
-        //}
+       
         
     }
 

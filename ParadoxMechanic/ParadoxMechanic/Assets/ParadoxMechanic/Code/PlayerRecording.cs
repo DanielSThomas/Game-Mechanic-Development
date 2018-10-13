@@ -11,6 +11,8 @@ public class PlayerRecording : MonoBehaviour
     [SerializeField] private float maxPoints;
     [SerializeField] private float recordTime;
     private bool isRecording = false;
+    private ParadoxCreator paradoxCreator;
+    
 
     public List<Vector3> recordedPointsCopy; 
     
@@ -19,18 +21,18 @@ public class PlayerRecording : MonoBehaviour
     // Use this for initialization
     void Start () 
     {
-        
+        paradoxCreator = GetComponent<ParadoxCreator>();
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-		if(Input.GetKeyDown(KeyCode.R) && isRecording == false)
+		if(Input.GetKeyDown(KeyCode.R) && isRecording == false) 
         { 
             StartCoroutine("RecordPoints");
-            recordedPoints.Clear();
+            recordedPoints.Clear();           
             isRecording = true;
-            Invoke("RecordEnd", recordTime);       
+            Invoke("RecordEnd", recordTime);        
         }
              
     }
@@ -40,6 +42,8 @@ public class PlayerRecording : MonoBehaviour
         StopCoroutine("RecordPoints");
         recordedPointsCopy = recordedPoints;
         isRecording = false;
+        this.transform.position = recordedPoints[0];
+        paradoxCreator.CreateClone();
     }
     
 
