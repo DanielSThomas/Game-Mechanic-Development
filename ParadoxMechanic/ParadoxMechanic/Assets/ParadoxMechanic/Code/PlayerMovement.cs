@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-
+    private Rigidbody rb;
     [SerializeField]private float speed = 10.0F;
 
   
@@ -13,17 +13,23 @@ public class PlayerMovement : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         float _verticalMovement = Input.GetAxis("Vertical") * speed;
         float _horizontalMovement = Input.GetAxis("Horizontal") * speed;
-        _verticalMovement *= Time.deltaTime;
-        _horizontalMovement *= Time.deltaTime;
+        
 
-        transform.Translate(_horizontalMovement, 0, _verticalMovement);
+        Vector3 _movement = new Vector3(_horizontalMovement, 0, _verticalMovement);
+
+        _movement = Vector3.ClampMagnitude(_movement, speed);
+        _movement *= Time.deltaTime;
+         
+        transform.Translate(_movement);
 
         if (Input.GetKeyDown("escape"))
         {

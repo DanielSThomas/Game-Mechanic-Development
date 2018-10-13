@@ -25,7 +25,7 @@ public class ParadoxAI : MonoBehaviour
         for(; ; )
         { 
 
-            if(localRecordedPoints.Count > 1)
+            if(localRecordedPoints.Count > 0)
             {
                 transform.position = localRecordedPoints[0];
 
