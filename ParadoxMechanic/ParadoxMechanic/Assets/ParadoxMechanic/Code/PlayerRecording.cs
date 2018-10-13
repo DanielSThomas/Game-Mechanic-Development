@@ -1,10 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PostProcessing;
 
 public class PlayerRecording : MonoBehaviour
 {
 
+    //VisualEffects
+    [SerializeField]private PostProcessingProfile profileNormal;
+    [SerializeField]private PostProcessingProfile profileRecording;
+    [SerializeField] private PostProcessingBehaviour ppb;
+
+
+    //Varribles
     [SerializeField] private List<Vector3> recordedPoints;
     [SerializeField] private List<Quaternion> recordedRotation;
     private Vector3 point;
@@ -44,13 +52,17 @@ public class PlayerRecording : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+    
+
 		if(Input.GetKeyDown(KeyCode.R) && isRecording == false) 
         { 
             StartCoroutine("RecordPoints");
             recordedPoints.Clear();
             recordedRotation.Clear();
             isRecording = true;
-            Invoke("RecordEnd", recordTime);        
+            Invoke("RecordEnd", recordTime);
+
+            ppb.profile = profileRecording;
         }
              
     }
@@ -64,6 +76,8 @@ public class PlayerRecording : MonoBehaviour
         transform.position = recordedPoints[0];
         
         paradoxCreator.CreateClone();
+
+        ppb.profile = profileNormal;
     }
     
 
