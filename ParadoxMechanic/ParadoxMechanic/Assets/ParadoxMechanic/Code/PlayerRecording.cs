@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class PlayerRecording : MonoBehaviour
 {
-
-    [SerializeField] private List<Vector3> recordedPoints;
+    private List<Vector3> recordedPoints;
     private Vector3 point;
+
+    public RecordClass record;
+
     [SerializeField] private float recordAccuracy;
     [SerializeField] private float maxPoints;
     [SerializeField] private float recordTime;
     private bool isRecording = false;
     private ParadoxCreator paradoxCreator;
     
-
+     
     public List<Vector3> recordedPointsCopy; 
     
    
@@ -21,8 +23,11 @@ public class PlayerRecording : MonoBehaviour
     // Use this for initialization
     void Start () 
     {
+        record = new RecordClass(recordedPoints, point);
+
         paradoxCreator = GetComponent<ParadoxCreator>();
 	}
+
 	
 	// Update is called once per frame
 	void Update ()
