@@ -6,7 +6,9 @@ public class PlayerRecording : MonoBehaviour
 {
 
     [SerializeField] private List<Vector3> recordedPoints;
+    [SerializeField] private List<Quaternion> recordedRotation;
     private Vector3 point;
+    private Quaternion rotation;
     [SerializeField] private float recordAccuracy;
     [SerializeField] private float maxPoints;
     [SerializeField] private float recordTime;
@@ -14,9 +16,9 @@ public class PlayerRecording : MonoBehaviour
     private ParadoxCreator paradoxCreator;
     
 
-    public List<Vector3> recordedPointsCopy; 
-    
-   
+    public List<Vector3> recordedPointsCopy;
+    public List<Quaternion> recordedRotationCopy;
+
 
     // Use this for initialization
     void Start () 
@@ -30,7 +32,8 @@ public class PlayerRecording : MonoBehaviour
 		if(Input.GetKeyDown(KeyCode.R) && isRecording == false) 
         { 
             StartCoroutine("RecordPoints");
-            recordedPoints.Clear();           
+            recordedPoints.Clear();
+            recordedRotation.Clear();
             isRecording = true;
             Invoke("RecordEnd", recordTime);        
         }
@@ -41,8 +44,10 @@ public class PlayerRecording : MonoBehaviour
     {
         StopCoroutine("RecordPoints");
         recordedPointsCopy = recordedPoints;
+        recordedRotationCopy = recordedRotation;
         isRecording = false;
-        this.transform.position = recordedPoints[0];
+        transform.position = recordedPoints[0];
+        
         paradoxCreator.CreateClone();
     }
     
@@ -53,14 +58,18 @@ public class PlayerRecording : MonoBehaviour
         for(; ; )
         {
             
-            if(recordedPoints.Count >= maxPoints)
-            {
-                recordedPoints.RemoveAt(0);
-            }
+            //if(recordedPoints.Count >= maxPoints)
+            //{
+            //    recordedPoints.RemoveAt(0);
+            //}
 
-            point = this.transform.position;
+            point = transform.position;
 
+            
+            rotation = transform.rotation;
+             
             recordedPoints.Add(point);
+            recordedRotation.Add(rotation);
 
             Debug.DrawRay(point, transform.up, Color.red, 15);
 

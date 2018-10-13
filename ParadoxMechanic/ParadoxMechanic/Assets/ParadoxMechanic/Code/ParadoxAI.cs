@@ -5,11 +5,13 @@ using UnityEngine;
 public class ParadoxAI : MonoBehaviour
 {
     [SerializeField]private List<Vector3> localRecordedPoints;
+    [SerializeField]private List<Quaternion> localRotationPoints;
 
     // Use this for initialization
     void Start ()
     {
         localRecordedPoints = GameObject.Find("Player").GetComponent<PlayerRecording>().recordedPointsCopy;
+        localRotationPoints = GameObject.Find("Player").GetComponent<PlayerRecording>().recordedRotationCopy;
         StartCoroutine("Movement");
     }
 	
@@ -28,14 +30,15 @@ public class ParadoxAI : MonoBehaviour
             if(localRecordedPoints.Count > 0)
             {
                 transform.position = localRecordedPoints[0];
-
+                transform.rotation = localRotationPoints[0];
                 localRecordedPoints.RemoveAt(0);
+                localRotationPoints.RemoveAt(0);
             }
             else
             {
                 StopCoroutine("Movement");
             }
-
+             
             yield return new WaitForSeconds(0.02f);
 
         }
