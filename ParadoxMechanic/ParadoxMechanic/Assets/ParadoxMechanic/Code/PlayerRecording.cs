@@ -10,6 +10,7 @@ public class PlayerRecording : MonoBehaviour
     [SerializeField] private float recordAccuracy;
     [SerializeField] private float maxPoints;
     [SerializeField] private float recordTime;
+    private bool isRecording = false;
 
     public List<Vector3> recordedPointsCopy; 
     
@@ -24,11 +25,12 @@ public class PlayerRecording : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-		if(Input.GetKeyDown(KeyCode.R))
+		if(Input.GetKeyDown(KeyCode.R) && isRecording == false)
         { 
             StartCoroutine("RecordPoints");
             recordedPoints.Clear();
-            Invoke("RecordEnd", recordTime);
+            isRecording = true;
+            Invoke("RecordEnd", recordTime);       
         }
              
     }
@@ -37,6 +39,7 @@ public class PlayerRecording : MonoBehaviour
     {
         StopCoroutine("RecordPoints");
         recordedPointsCopy = recordedPoints;
+        isRecording = false;
     }
     
 
