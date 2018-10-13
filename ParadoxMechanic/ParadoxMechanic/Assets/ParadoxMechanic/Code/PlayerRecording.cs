@@ -9,9 +9,9 @@ public class PlayerRecording : MonoBehaviour
     private Vector3 point;
     [SerializeField] private float recordAccuracy;
     [SerializeField] private float maxPoints;
-    
-   
-    public List<Vector3> recordedPointsCopy;
+    [SerializeField] private float recordTime;
+
+    public List<Vector3> recordedPointsCopy; 
     
    
 
@@ -28,15 +28,17 @@ public class PlayerRecording : MonoBehaviour
         { 
             StartCoroutine("RecordPoints");
             recordedPoints.Clear();
+            Invoke("RecordEnd", recordTime);
         }
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            StopCoroutine("RecordPoints");
-            recordedPointsCopy = recordedPoints;
-        }
-        
-
+             
     }
+
+    void RecordEnd()
+    {
+        StopCoroutine("RecordPoints");
+        recordedPointsCopy = recordedPoints;
+    }
+    
 
 
     IEnumerator RecordPoints()
@@ -56,12 +58,12 @@ public class PlayerRecording : MonoBehaviour
             Debug.DrawRay(point, transform.up, Color.red, 15);
 
             yield return new WaitForSeconds(recordAccuracy);
-         
-            
-
+   
 
         }
         
     }
+
+    
    
 }
