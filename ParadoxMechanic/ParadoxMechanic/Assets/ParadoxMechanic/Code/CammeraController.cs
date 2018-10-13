@@ -10,15 +10,18 @@ public class CammeraController : MonoBehaviour
     [SerializeField]public float smoothing = 2.0f;
 
     private Vector2 recordedCamPoint;
+    [SerializeField]private bool localIsRecording;
 
     [SerializeField] private GameObject character;
 
 	// Use this for initialization
 	void Start ()
     {
-        character = this.transform.parent.gameObject;
+        character = transform.parent.gameObject;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        
     }
 
     // Update is called once per frame
@@ -34,10 +37,11 @@ public class CammeraController : MonoBehaviour
         character.transform.localRotation = Quaternion.AngleAxis(mouseLook.x, character.transform.up);
         
 
-        if(Input.GetKey(KeyCode.R))
+        if(Input.GetKey(KeyCode.R) && localIsRecording == false)
         {
             recordedCamPoint = mouseLook;
             Invoke("RestartCam", 5);
+            localIsRecording = character.GetComponent<PlayerRecording>().GetisRecording;
         }
 
         if (Input.GetKey(KeyCode.M))
@@ -55,5 +59,6 @@ public class CammeraController : MonoBehaviour
     private void RestartCam()
     {
         mouseLook = recordedCamPoint;
+        localIsRecording = character.GetComponent<PlayerRecording>().GetisRecording;
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.PostProcessing;
+using UnityEngine.UI;
 
 public class PlayerRecording : MonoBehaviour
 {
@@ -9,8 +10,9 @@ public class PlayerRecording : MonoBehaviour
     //VisualEffects
     [SerializeField]private PostProcessingProfile profileNormal;
     [SerializeField]private PostProcessingProfile profileRecording;
-    [SerializeField] private PostProcessingBehaviour ppb;
+    [SerializeField]private PostProcessingBehaviour ppb;
 
+    [SerializeField] private Text recordText;
 
     //Varribles
     [SerializeField] private List<Vector3> recordedPoints;
@@ -24,7 +26,14 @@ public class PlayerRecording : MonoBehaviour
 
     private bool isRecording = false;
     private ParadoxCreator paradoxCreator;
-      
+
+    public bool GetisRecording
+    {
+        get
+        {
+            return isRecording;
+        }
+    }
 
     public List<Vector3> GetPoints
     {
@@ -47,12 +56,14 @@ public class PlayerRecording : MonoBehaviour
     void Start () 
     {
         paradoxCreator = GetComponent<ParadoxCreator>();
-	}
+
+        recordText.enabled = false;
+    }
 	
 	// Update is called once per frame
 	void Update ()
     {
-    
+        
 
 		if(Input.GetKeyDown(KeyCode.R) && isRecording == false) 
         { 
@@ -63,8 +74,14 @@ public class PlayerRecording : MonoBehaviour
             Invoke("RecordEnd", recordTime);
 
             ppb.profile = profileRecording;
+            recordText.enabled = true;
+
+           
         }
-             
+
+        
+
+
     }
 
     void RecordEnd()
@@ -78,6 +95,7 @@ public class PlayerRecording : MonoBehaviour
         paradoxCreator.CreateClone();
 
         ppb.profile = profileNormal;
+        recordText.enabled = false;
     }
     
 
