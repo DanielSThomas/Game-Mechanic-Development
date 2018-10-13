@@ -9,15 +9,30 @@ public class PlayerRecording : MonoBehaviour
     [SerializeField] private List<Quaternion> recordedRotation;
     private Vector3 point;
     private Quaternion rotation;
+
     [SerializeField] private float recordAccuracy;
     [SerializeField] private float maxPoints;
     [SerializeField] private float recordTime;
+
     private bool isRecording = false;
     private ParadoxCreator paradoxCreator;
-    
+      
 
-    public List<Vector3> recordedPointsCopy;
-    public List<Quaternion> recordedRotationCopy;
+    public List<Vector3> GetPoints
+    {
+        get
+        {
+            return recordedPoints;
+        }
+    }
+
+    public List<Quaternion> GetRotationPoints
+    {
+        get
+        {
+            return recordedRotation;
+        }
+    }
 
 
     // Use this for initialization
@@ -43,8 +58,8 @@ public class PlayerRecording : MonoBehaviour
     void RecordEnd()
     {
         StopCoroutine("RecordPoints");
-        recordedPointsCopy = recordedPoints;
-        recordedRotationCopy = recordedRotation;
+        
+        
         isRecording = false;
         transform.position = recordedPoints[0];
         

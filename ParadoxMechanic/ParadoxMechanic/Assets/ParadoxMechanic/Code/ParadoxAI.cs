@@ -10,14 +10,14 @@ public class ParadoxAI : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-        localRecordedPoints = GameObject.Find("Player").GetComponent<PlayerRecording>().recordedPointsCopy;
-        localRotationPoints = GameObject.Find("Player").GetComponent<PlayerRecording>().recordedRotationCopy;
+        localRecordedPoints = GameObject.Find("Player").GetComponent<PlayerRecording>().GetPoints;
+        localRotationPoints = GameObject.Find("Player").GetComponent<PlayerRecording>().GetRotationPoints;
         StartCoroutine("Movement");
     }
 	
 	// Update is called once per frame
 	void Update ()
-    {
+    { 
        
         
     }
