@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ParadoxAI : MonoBehaviour
-{ 
-    private List<Vector3> localRecordList;
+{
+    [SerializeField]private List<Vector3> localRecordedPoints;
 
     // Use this for initialization
     void Start ()
     {
-        localRecordList = GameObject.Find("Player").GetComponent<PlayerRecording>().record.RecordedPoints;
-        StartCoroutine("Movement");      
+        localRecordedPoints = GameObject.Find("Player").GetComponent<PlayerRecording>().recordedPointsCopy;
+        StartCoroutine("Movement");
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
        
-         
+        
     }
 
     IEnumerator Movement()
@@ -25,11 +25,11 @@ public class ParadoxAI : MonoBehaviour
         for(; ; )
         { 
 
-            if(localRecordList.Count > 1)
+            if(localRecordedPoints.Count > 1)
             {
-                transform.position = localRecordList[0];
+                transform.position = localRecordedPoints[0];
 
-                localRecordList.RemoveAt(0);
+                localRecordedPoints.RemoveAt(0);
             }
             else
             {
