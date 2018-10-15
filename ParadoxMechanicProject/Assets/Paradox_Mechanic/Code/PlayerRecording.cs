@@ -28,6 +28,7 @@ public class PlayerRecording : MonoBehaviour
     //[SerializeField] private float maxPoints;
 
     [SerializeField] private float recordTime;
+    [SerializeField] private float timer;
 
     private bool isRecording = false;
     private ParadoxCreator paradoxCreator;
@@ -95,7 +96,7 @@ public class PlayerRecording : MonoBehaviour
 
             ppb.profile = profileRecording;
             recordText.enabled = true;
-
+            timer = 5f;
            
         }
 
@@ -104,7 +105,9 @@ public class PlayerRecording : MonoBehaviour
             // transform.position = respawn.position;
             SceneManager.LoadScene(loadedscene.buildIndex);
         }
-
+        
+        timer -= Time.deltaTime;
+        recordText.text = timer.ToString("0");
 
     }
 
