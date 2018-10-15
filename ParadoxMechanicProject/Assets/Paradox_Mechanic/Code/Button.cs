@@ -6,7 +6,7 @@ public class Button : MonoBehaviour
 {
 
     [SerializeField]private GameObject target;
-    [SerializeField] private bool active = false;
+    [SerializeField]private bool active = false;
 
 	// Use this for initialization
 	void Start ()

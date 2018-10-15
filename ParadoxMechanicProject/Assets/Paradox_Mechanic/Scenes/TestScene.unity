@@ -5575,6 +5575,11 @@ Prefab:
       propertyPath: recordText
       value: 
       objectReference: {fileID: 2069239410}
+    - target: {fileID: 114295184735699406, guid: 98a99bb5ef7c4c64dbfa4b432a5622a2,
+        type: 2}
+      propertyPath: sensitivity
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 98a99bb5ef7c4c64dbfa4b432a5622a2, type: 2}
   m_IsPrefabParent: 0

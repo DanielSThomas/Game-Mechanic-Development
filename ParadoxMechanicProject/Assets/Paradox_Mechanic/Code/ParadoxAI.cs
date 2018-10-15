@@ -7,11 +7,20 @@ public class ParadoxAI : MonoBehaviour
     [SerializeField]private List<Vector3> localRecordedPoints;
     [SerializeField]private List<Quaternion> localRotationPoints;
 
+    private PlayerRecording pr;
+
+    [Range(0.01f,0.1f)]
+    [SerializeField] private float accuracy; 
+
     // Use this for initialization
     void Start ()
     {
-        localRecordedPoints = GameObject.Find("Player").GetComponent<PlayerRecording>().GetPoints;
-        localRotationPoints = GameObject.Find("Player").GetComponent<PlayerRecording>().GetRotationPoints;
+        pr = GameObject.Find("Player").GetComponent<PlayerRecording>();
+
+        localRotationPoints = pr.CreateCopyRotationList();
+
+        localRecordedPoints = pr.CreateCopyPointList();
+        
         StartCoroutine("Movement");
     }
 	
@@ -27,10 +36,11 @@ public class ParadoxAI : MonoBehaviour
         for(; ; )
         { 
 
-            if(localRecordedPoints.Count > 0)
+            if(localRotationPoints.Count > 0)
             {
                 transform.position = localRecordedPoints[0];
                 transform.rotation = localRotationPoints[0];
+
                 localRecordedPoints.RemoveAt(0);
                 localRotationPoints.RemoveAt(0);
             }
@@ -39,7 +49,7 @@ public class ParadoxAI : MonoBehaviour
                 StopCoroutine("Movement");
             }
              
-            yield return new WaitForSeconds(0.02f);
+            yield return new WaitForSeconds(accuracy);
 
         }
 

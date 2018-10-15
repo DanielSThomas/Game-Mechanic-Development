@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class PlayerRecording : MonoBehaviour
 {
 
-    //VisualEffects
+    //VisualEffects Varribles
     [SerializeField]private PostProcessingProfile profileNormal;
     [SerializeField]private PostProcessingProfile profileRecording;
     [SerializeField]private PostProcessingBehaviour ppb;
@@ -17,16 +17,19 @@ public class PlayerRecording : MonoBehaviour
     //Varribles
     [SerializeField] private List<Vector3> recordedPoints;
     [SerializeField] private List<Quaternion> recordedRotation;
+
     private Vector3 point;
     private Quaternion rotation;
 
     [SerializeField] private float recordAccuracy;
-    [SerializeField] private float maxPoints;
+    //[SerializeField] private float maxPoints;
+
     [SerializeField] private float recordTime;
 
     private bool isRecording = false;
     private ParadoxCreator paradoxCreator;
 
+    //Gets
     public bool GetisRecording
     {
         get
@@ -35,20 +38,29 @@ public class PlayerRecording : MonoBehaviour
         }
     }
 
-    public List<Vector3> GetPoints
+
+    public List<Vector3> CreateCopyPointList()
     {
-        get
+        List<Vector3> _localList = new List<Vector3>(recordedPoints);
+
+        for (int i = 0; i < recordedPoints.Count; i++)
         {
-            return recordedPoints;
+            _localList[i] = recordedPoints[i];
         }
+
+        return _localList;
     }
 
-    public List<Quaternion> GetRotationPoints
+    public List<Quaternion> CreateCopyRotationList()
     {
-        get
+        List<Quaternion> _localList = new List<Quaternion>(recordedRotation);
+
+        for (int i = 0; i < recordedRotation.Count; i++)
         {
-            return recordedRotation;
+            _localList[i] = recordedRotation[i];
         }
+
+        return _localList;
     }
 
 

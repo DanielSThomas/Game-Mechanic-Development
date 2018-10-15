@@ -7,7 +7,7 @@ public class CammeraController : MonoBehaviour
     private Vector2 mouseLook;
     private Vector2 smoothV;
     [SerializeField]private float sensitivity = 5.0f;
-    [SerializeField]public float smoothing = 2.0f;
+    [SerializeField]private float smoothing = 2.0f;
 
     private Vector2 recordedCamPoint;
     [SerializeField]private bool localIsRecording;
@@ -30,13 +30,14 @@ public class CammeraController : MonoBehaviour
         var md = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
         smoothV.x = Mathf.Lerp(smoothV.x, md.x, 1f / smoothing);
         smoothV.y = Mathf.Lerp(smoothV.y, md.y, 1f / smoothing);
-        mouseLook += smoothV;
+        mouseLook += smoothV * sensitivity;
         mouseLook.y = Mathf.Clamp(mouseLook.y, -90f, 90f);
 
         transform.localRotation = Quaternion.AngleAxis(-mouseLook.y, Vector3.right);
         character.transform.localRotation = Quaternion.AngleAxis(mouseLook.x, character.transform.up);
         
 
+        //Restarting Play Rotation
         if(Input.GetKey(KeyCode.R) && localIsRecording == false)
         {
             recordedCamPoint = mouseLook;
@@ -44,6 +45,8 @@ public class CammeraController : MonoBehaviour
             localIsRecording = character.GetComponent<PlayerRecording>().GetisRecording;
         }
 
+
+        //Free Mouse
         if (Input.GetKey(KeyCode.M))
         {
             Cursor.lockState = CursorLockMode.None;
