@@ -38,7 +38,7 @@ public class CammeraController : MonoBehaviour
         
 
         //Restarting Play Rotation
-        if(Input.GetKey(KeyCode.R) && localIsRecording == false)
+        if(Input.GetMouseButtonDown(0) && localIsRecording == false)
         {
             recordedCamPoint = mouseLook;
             Invoke("RestartCam", 5);
