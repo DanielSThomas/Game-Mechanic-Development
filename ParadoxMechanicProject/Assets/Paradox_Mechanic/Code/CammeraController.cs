@@ -37,7 +37,7 @@ public class CammeraController : MonoBehaviour
         character.transform.localRotation = Quaternion.AngleAxis(mouseLook.x, character.transform.up);
         
 
-        //Restarting Play Rotation
+        //Restarting Player Rotation
         if(Input.GetMouseButtonDown(0) && localIsRecording == false)
         {
             recordedCamPoint = mouseLook;

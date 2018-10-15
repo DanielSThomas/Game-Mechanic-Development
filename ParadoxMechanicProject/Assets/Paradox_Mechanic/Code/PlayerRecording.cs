@@ -99,7 +99,7 @@ public class PlayerRecording : MonoBehaviour
            
         }
 
-        if(Input.GetMouseButtonDown(1) && isRecording == false)
+        if(Input.GetKeyDown(KeyCode.R) && isRecording == false)
         {
             // transform.position = respawn.position;
             SceneManager.LoadScene(loadedscene.buildIndex);
