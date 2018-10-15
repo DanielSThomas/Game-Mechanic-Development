@@ -10,6 +10,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]private float mouseSensitivity;
     [SerializeField]private Camera camera;
 
+    [SerializeField]private float cameraClamp;
+    private float currentRotation;
+
     // Use this for initialization
     void Start()
     {
@@ -58,10 +61,12 @@ public class PlayerMovement : MonoBehaviour
 
 
         float _xRotation = Input.GetAxisRaw("Mouse Y");
+        
+        currentRotation -= _xRotation * mouseSensitivity;
 
-        Vector3 _camRotation = new Vector3(_xRotation, 0, 0) * mouseSensitivity;
+        currentRotation = Mathf.Clamp(currentRotation, -cameraClamp, cameraClamp);
 
-        camera.transform.Rotate(-_camRotation);
+        camera.transform.localEulerAngles = new Vector3 (currentRotation, 0f, 0f);
 
     }
     

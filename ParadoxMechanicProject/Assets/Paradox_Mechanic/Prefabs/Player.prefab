@@ -325,10 +325,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 178f8f143d554ce488618bb97dd77504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 6
+  speed: 7
   rb: {fileID: 54704400136118594}
-  mouseSensitivity: 3
+  mouseSensitivity: 2
   camera: {fileID: 0}
+  cameraClamp: 0
 --- !u!136 &136029175365529722
 CapsuleCollider:
   m_ObjectHideFlags: 1
