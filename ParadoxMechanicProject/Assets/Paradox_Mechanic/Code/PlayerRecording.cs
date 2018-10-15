@@ -3,12 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.PostProcessing;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class PlayerRecording : MonoBehaviour
 {
-
-    private Scene loadedscene;
 
     //VisualEffects Varribles
     [SerializeField]private PostProcessingProfile profileNormal;
@@ -31,8 +28,6 @@ public class PlayerRecording : MonoBehaviour
 
     private bool isRecording = false;
     private ParadoxCreator paradoxCreator;
-
-    [SerializeField] private Transform respawn;
 
     //Gets
     public bool GetisRecording
@@ -75,9 +70,6 @@ public class PlayerRecording : MonoBehaviour
         paradoxCreator = GetComponent<ParadoxCreator>();
 
         recordText.enabled = false;
-
-        loadedscene = SceneManager.GetActiveScene();
-
     }
 	
 	// Update is called once per frame
@@ -85,7 +77,7 @@ public class PlayerRecording : MonoBehaviour
     {
         
 
-		if(Input.GetMouseButtonDown(0) && isRecording == false) 
+		if(Input.GetKeyDown(KeyCode.R) && isRecording == false) 
         { 
             StartCoroutine("RecordPoints");
             recordedPoints.Clear();
@@ -99,11 +91,7 @@ public class PlayerRecording : MonoBehaviour
            
         }
 
-        if(Input.GetMouseButtonDown(1) && isRecording == false)
-        {
-            // transform.position = respawn.position;
-            SceneManager.LoadScene(loadedscene.buildIndex);
-        }
+        
 
 
     }
