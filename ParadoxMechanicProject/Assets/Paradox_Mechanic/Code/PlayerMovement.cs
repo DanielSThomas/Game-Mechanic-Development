@@ -7,11 +7,15 @@ public class PlayerMovement : MonoBehaviour
    
     [SerializeField]private float speed = 10.0F;
     [SerializeField]private Rigidbody rb;
+    [SerializeField]private Collider coll;
     [SerializeField]private float mouseSensitivity;
     [SerializeField]private Camera camera;
 
     [SerializeField]private float cameraClamp;
     private float currentRotation;
+    [SerializeField]private float ground;
+    [SerializeField] private float jumpForce;
+    [SerializeField] private bool canJump;
 
     // Use this for initialization
     void Start()
@@ -19,7 +23,10 @@ public class PlayerMovement : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         rb = GetComponent<Rigidbody>();
+        coll = GetComponent<Collider>();
         camera = Camera.main;
+        ground = coll.bounds.extents.y;
+        canJump = true;
     }
 
     // Update is called once per frame
@@ -51,6 +58,17 @@ public class PlayerMovement : MonoBehaviour
             Cursor.visible = true;
         }
 
+        //Jumping
+
+        if (Input.GetKeyDown(KeyCode.Space) && canJump == true && IsGrounded())
+        {
+            rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+            canJump = false;
+            Invoke("JumpCooldown", 1.1f);
+        }
+
+        
+
         //Rotation
 
         float _yRotation = Input.GetAxisRaw("Mouse X");
@@ -69,6 +87,17 @@ public class PlayerMovement : MonoBehaviour
         camera.transform.localEulerAngles = new Vector3 (currentRotation, 0f, 0f);
 
     }
+
+    private bool IsGrounded()
+    {
+        return Physics.Raycast(transform.position, -Vector3.up, ground + 0.1f); 
+    }
+
+    private void JumpCooldown()
+    {
+        canJump = true;
+    }
+
     
 
 
