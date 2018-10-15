@@ -115,7 +115,7 @@ public class PlayerRecording : MonoBehaviour
         
         isRecording = false;
         transform.position = recordedPoints[0];
-        
+        transform.rotation = recordedRotation[0];
         paradoxCreator.CreateClone();
 
         ppb.profile = profileNormal;
