@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]private Rigidbody rb;
     [SerializeField]private Collider coll;
     [SerializeField]private float mouseSensitivity;
-    [SerializeField]private Camera camera;
+    [SerializeField]private Camera cam;
 
     [SerializeField]private float cameraClamp;
     private float currentRotation;
@@ -23,14 +23,14 @@ public class PlayerMovement : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         rb = GetComponent<Rigidbody>();
-        coll = GetComponent<Collider>();
-        camera = Camera.main;
+        
+        cam = Camera.main;
         ground = coll.bounds.extents.y;
         canJump = true;
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         //Movement
 
@@ -60,12 +60,18 @@ public class PlayerMovement : MonoBehaviour
 
         //Jumping
 
-        if (Input.GetKeyDown(KeyCode.Space) && canJump == true && IsGrounded())
+        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
-            rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
-            canJump = false;
-            Invoke("JumpCooldown", 1.1f);
+            rb.velocity = Vector3.up * jumpForce;
         }
+
+        if (rb.velocity.y < 0)
+        {
+            rb.velocity += Vector3.up * Physics.gravity.y * (2 - 1) * Time.deltaTime;
+        }
+       
+
+      
 
         
 
@@ -84,21 +90,18 @@ public class PlayerMovement : MonoBehaviour
 
         currentRotation = Mathf.Clamp(currentRotation, -cameraClamp, cameraClamp);
 
-        camera.transform.localEulerAngles = new Vector3 (currentRotation, 0f, 0f);
+        cam.transform.localEulerAngles = new Vector3 (currentRotation, 0f, 0f);
 
     }
 
     private bool IsGrounded()
     {
-        return Physics.Raycast(transform.position, -Vector3.up, ground + 0.1f); 
+        return Physics.Raycast(transform.position, -Vector3.up, ground + 0.2f);
     }
 
-    private void JumpCooldown()
-    {
-        canJump = true;
-    }
 
-    
+
+
 
 
 }
