@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
     private float currentRotation;
     [SerializeField]private float ground;
     [SerializeField] private float jumpForce;
-    [SerializeField] private bool canJump;
+    
 
     // Use this for initialization
     void Start()
@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
         
         cam = Camera.main;
         ground = coll.bounds.extents.y;
-        canJump = true;
+        
     }
 
     // Update is called once per frame
