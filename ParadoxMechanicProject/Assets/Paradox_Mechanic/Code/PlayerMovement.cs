@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     private float currentRotation;
     
     [SerializeField] private float jumpForce;
+    [SerializeField] LayerMask raycastMask;
     
 
     // Use this for initialization
@@ -91,11 +92,14 @@ public class PlayerMovement : MonoBehaviour
 
         cam.transform.localEulerAngles = new Vector3 (currentRotation, 0f, 0f);
 
+        Debug.DrawRay(transform.position + new Vector3(0, -0.8f, 0), -Vector3.up * 0.5f, Color.blue);
     }
+
+    
 
     private bool IsGrounded()
     {
-        return Physics.Raycast(transform.position, -Vector3.up, 1.2f);      
+        return Physics.Raycast(transform.position + new Vector3(0,-0.8f,0), -Vector3.up, 0.5f, raycastMask);      
     }
 
 
