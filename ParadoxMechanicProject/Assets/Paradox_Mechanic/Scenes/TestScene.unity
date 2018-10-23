@@ -3019,6 +3019,11 @@ Prefab:
       propertyPath: instanciateLocation
       value: 
       objectReference: {fileID: 2081842466}
+    - target: {fileID: 114200551939609450, guid: 98a99bb5ef7c4c64dbfa4b432a5622a2,
+        type: 2}
+      propertyPath: lifeTime
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 98a99bb5ef7c4c64dbfa4b432a5622a2, type: 2}
   m_IsPrefabParent: 0
@@ -5314,7 +5319,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-1050
+  m_Name: pb_Mesh60228
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2

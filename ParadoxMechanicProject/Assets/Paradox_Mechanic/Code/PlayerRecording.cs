@@ -92,12 +92,18 @@ public class PlayerRecording : MonoBehaviour
             recordedPoints.Clear();
             recordedRotation.Clear();
             isRecording = true;
+
             Invoke("RecordEnd", recordTime);
 
             ppb.profile = profileRecording;
             recordText.enabled = true;
             timer = 5f;
            
+        }
+        if(Input.GetMouseButtonDown(1) && isRecording == true)
+        {
+            RecordEnd();
+            CancelInvoke();
         }
 
         if(Input.GetKeyDown(KeyCode.R) && isRecording == false)
@@ -113,16 +119,22 @@ public class PlayerRecording : MonoBehaviour
 
     void RecordEnd()
     {
-        StopCoroutine("RecordPoints");
-        
-        
-        isRecording = false;
-        transform.position = recordedPoints[0];
-        transform.rotation = recordedRotation[0];
-        paradoxCreator.CreateClone();
+        if (isRecording == true)
+        {
+            StopCoroutine("RecordPoints");
 
-        ppb.profile = profileNormal;
-        recordText.enabled = false;
+
+            isRecording = false;
+            transform.position = recordedPoints[0];
+            transform.rotation = recordedRotation[0];
+            paradoxCreator.CreateClone();
+
+            ppb.profile = profileNormal;
+            recordText.enabled = false;
+        }
+        else
+            return;
+        
     }
     
 
