@@ -15,7 +15,8 @@ public class PlayerMovement : MonoBehaviour
     
     [SerializeField] private float jumpForce;
     [SerializeField] LayerMask raycastMask;
-    
+    [SerializeField] private bool grounded;
+
 
     // Use this for initialization
     void Start()
@@ -25,8 +26,9 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         
         cam = Camera.main;
-        
-        
+        grounded = false;
+
+
     }
 
     // Update is called once per frame
@@ -60,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
 
         //Jumping
 
-        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
+        if (Input.GetKeyDown(KeyCode.Space) && grounded == true)
         {
             rb.velocity = Vector3.up * jumpForce;
         }
@@ -100,6 +102,22 @@ public class PlayerMovement : MonoBehaviour
     private bool IsGrounded()
     {
         return Physics.Raycast(transform.position + new Vector3(0,-0.8f,0), -Vector3.up, 0.5f, raycastMask);      
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        foreach (ContactPoint contact in collision.contacts)
+        {
+            if(Vector3.Angle(contact.normal, Vector3.up) < 60)
+            {
+                grounded = true;
+            }
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        grounded = false;
     }
 
 
