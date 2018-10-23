@@ -12,7 +12,7 @@ public class CammeraController : MonoBehaviour
     private Vector2 recordedCamPoint;
     [SerializeField]private bool localIsRecording;
 
-    [SerializeField] private GameObject character;
+    [SerializeField]private GameObject character;
 
 	// Use this for initialization
 	void Start ()

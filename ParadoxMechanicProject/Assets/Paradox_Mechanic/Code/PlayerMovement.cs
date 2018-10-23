@@ -5,15 +5,14 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
    
-    [SerializeField]private float speed = 10.0F;
-    [SerializeField]private Rigidbody rb;
-    [SerializeField]private Collider coll;
+    [SerializeField]private float speed = 8F;
+    [SerializeField]private Rigidbody rb;  
     [SerializeField]private float mouseSensitivity;
     [SerializeField]private Camera cam;
 
     [SerializeField]private float cameraClamp;
     private float currentRotation;
-    [SerializeField]private float ground;
+    
     [SerializeField] private float jumpForce;
     
 
@@ -25,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         
         cam = Camera.main;
-        ground = coll.bounds.extents.y;
+        
         
     }
 
@@ -43,12 +42,12 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 _velocity = (_horizontalMovement + _verticalMovement).normalized * speed;
 
-      
-       
+        
+
 
         if (_velocity != Vector3.zero)
         {
-            rb.MovePosition(rb.position + _velocity * Time.fixedDeltaTime);
+            rb.MovePosition(rb.position + _velocity * Time.deltaTime);
         }
         
 
@@ -96,7 +95,8 @@ public class PlayerMovement : MonoBehaviour
 
     private bool IsGrounded()
     {
-        return Physics.Raycast(transform.position, -Vector3.up, ground + 0.2f);
+        return Physics.Raycast(transform.position, -Vector3.up, 1.2f);
+        
     }
 
 
