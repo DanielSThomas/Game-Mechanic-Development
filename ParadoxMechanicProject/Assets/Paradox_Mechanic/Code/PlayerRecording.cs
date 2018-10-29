@@ -86,7 +86,7 @@ public class PlayerRecording : MonoBehaviour
     {
         
 
-		if(Input.GetMouseButtonDown(0) && isRecording == false) 
+		if(Input.GetButton("Record") && isRecording == false) 
         { 
             StartCoroutine("RecordPoints");
             recordedPoints.Clear();
@@ -100,13 +100,13 @@ public class PlayerRecording : MonoBehaviour
             timer = 5f;
            
         }
-        if(Input.GetMouseButtonDown(1) && isRecording == true)
+        if(Input.GetButton("RecordEnd") && isRecording == true)
         {
             RecordEnd();
             CancelInvoke();
         }
 
-        if(Input.GetKeyDown(KeyCode.R) && isRecording == false)
+        if(Input.GetButton("Restart") && isRecording == false)
         {
             // transform.position = respawn.position;
             SceneManager.LoadScene(loadedscene.buildIndex);

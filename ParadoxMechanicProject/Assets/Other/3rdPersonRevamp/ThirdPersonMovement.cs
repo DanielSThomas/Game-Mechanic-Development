@@ -2,17 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class ThirdPersonMovement : MonoBehaviour
 {
    
     [SerializeField]private float speed = 8F;
-    [SerializeField]private Rigidbody rb;  
-    [SerializeField]private float mouseSensitivity;
-    [SerializeField]private Camera cam;
-
-    [SerializeField]private float cameraClamp;
-    private float currentRotation;
+    [SerializeField]private Rigidbody rb;
     
+
     [SerializeField] private float jumpForce;
     [SerializeField] LayerMask raycastMask;
     [SerializeField] private bool grounded;
@@ -25,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
         Cursor.visible = false;
         rb = GetComponent<Rigidbody>();
         
-        cam = Camera.main;
+      
         grounded = false;
 
 
@@ -36,16 +32,23 @@ public class PlayerMovement : MonoBehaviour
     {
         //Movement
 
-        float _yMovement = Input.GetAxis("Vertical") * speed;
-        float _xMovement = Input.GetAxis("Horizontal") * speed;
+        float _xMovement = speed * Input.GetAxis("Vertical");
+        float _zMovement = speed * Input.GetAxis("Horizontal");
 
-        Vector3 _verticalMovement = transform.forward * _yMovement;
-        Vector3 _horizontalMovement = transform.right * _xMovement;
+      
+
+        Vector3 _velocity = new Vector3(-_xMovement,0, _zMovement);
 
 
-        Vector3 _velocity = (_horizontalMovement + _verticalMovement).normalized * speed;
 
+        //Rotation
+
+        if (_velocity != Vector3.zero)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_velocity), 0.15F);
+        }
         
+
 
 
         if (_velocity != Vector3.zero)
@@ -84,22 +87,7 @@ public class PlayerMovement : MonoBehaviour
 
         //Rotation
 
-        float _yRotation = Input.GetAxisRaw("Mouse X");
-
-        Vector3 _rotation = new Vector3(0, _yRotation, 0) * mouseSensitivity;
-
-        rb.MoveRotation(rb.rotation * Quaternion.Euler(_rotation));
-
-
-        float _xRotation = Input.GetAxisRaw("Mouse Y");
-        
-        currentRotation -= _xRotation * mouseSensitivity;
-
-        currentRotation = Mathf.Clamp(currentRotation, -cameraClamp, cameraClamp);
-
-        cam.transform.localEulerAngles = new Vector3 (currentRotation, 0f, 0f);
-
-        Debug.DrawRay(transform.position + new Vector3(0, -0.8f, 0), -Vector3.up * 0.5f, Color.blue);
+     
     }
 
     
