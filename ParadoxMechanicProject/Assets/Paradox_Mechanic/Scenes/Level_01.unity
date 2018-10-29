@@ -144,7 +144,7 @@ Light:
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -171,19 +171,19 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 31102888}
-  m_LocalRotation: {x: 0.87125367, y: 0.0037289008, z: -0.25738245, w: 0.41792047}
+  m_LocalRotation: {x: 0.57585955, y: -0.5716154, z: 0.15331344, w: 0.564036}
   m_LocalPosition: {x: -4.8803425, y: 7, z: 2.6204498}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 46.899002, y: -139.322, z: -162.222}
+  m_LocalEulerAnglesHint: {x: 55.577003, y: 235.926, z: 300.836}
 --- !u!43 &185822037
 Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh33060
+  m_Name: pb_Mesh35964
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -1186,7 +1186,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 127
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &632462444
 Transform:
@@ -1541,7 +1541,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh33086
+  m_Name: pb_Mesh35990
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -1699,7 +1699,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 127
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &679732476
 Transform:
@@ -2217,7 +2217,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 127
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &772351251
 Transform:
@@ -3823,7 +3823,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-513238
+  m_Name: pb_Mesh36004
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
