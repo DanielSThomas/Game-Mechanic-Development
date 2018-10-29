@@ -32,12 +32,20 @@ public class ThirdPersonMovement : MonoBehaviour
     {
         //Movement
 
-        float _xMovement = speed * Input.GetAxis("Vertical");
-        float _zMovement = speed * Input.GetAxis("Horizontal");
+        float _zMovement = speed * Input.GetAxis("Vertical");
+        float _xMovement = speed * Input.GetAxis("Horizontal");
 
-      
+        Vector3 _verticalMovement = Camera.main.transform.forward * _zMovement;
 
-        Vector3 _velocity = new Vector3(-_xMovement,0, _zMovement);
+        _verticalMovement.y = 0;
+
+        Vector3 _horizontalMovement = Quaternion.Euler(new Vector3(0,90,0)) * _verticalMovement;
+
+        
+
+        
+
+        Vector3 _velocity = _horizontalMovement + _verticalMovement;
 
 
 
