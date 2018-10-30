@@ -194,7 +194,7 @@ Rigidbody:
   m_GameObject: {fileID: 1062881393913722}
   serializedVersion: 2
   m_Mass: 10
-  m_Drag: 0.05
+  m_Drag: 5
   m_AngularDrag: 500
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -234,9 +234,8 @@ MonoBehaviour:
   instanciateOB: {fileID: 1309610320390282, guid: 0530f44fe3c147041bcfcb3d6fb7322b,
     type: 2}
   instanciateLocation: {fileID: 0}
-  lifeTime: 0
-  allinstanciates: []
   maxClones: 3
+  allinstanciates: []
 --- !u!114 &114667811100277774
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -252,12 +251,11 @@ MonoBehaviour:
   profileRecording: {fileID: 11400000, guid: c290ed9cbba8350498690e585eacb563, type: 2}
   ppb: {fileID: 114689019394112824}
   recordText: {fileID: 0}
-  recordedPoints: []
-  recordedRotation: []
   recordAccuracy: 0.03
   recordTime: 5
-  timer: 0
   respawn: {fileID: 0}
+  recordedPoints: []
+  recordedRotation: []
 --- !u!114 &114689019394112824
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -8,7 +8,10 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 1
-    path: Assets/ParadoxMechanic/Scenes/TestScene.unity
+  - enabled: 0
+    path: Assets/Paradox_Mechanic/Scenes/TestScene.unity
     guid: 7585a732644cd0a4f935b1e27bb3a886
+  - enabled: 1
+    path: Assets/Paradox_Mechanic/Scenes/Level_01.unity
+    guid: de3758edc598c0b41b20368a9bf171c4
   m_configObjects: {}
