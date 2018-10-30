@@ -23,7 +23,7 @@ RenderSettings:
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 1
+  m_AmbientIntensity: 0.3
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.44458926, g: 0.49409974, b: 0.5733665, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -89,7 +89,8 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000026, guid: 615e227a23c59004e9213b9494e4cec9,
+    type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
@@ -1530,6 +1531,11 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!4 &295130638 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4698978309614246, guid: c33188458ecd45d4f92fbd17b4c9043e,
+    type: 2}
+  m_PrefabInternal: {fileID: 927587536}
 --- !u!114 &506623993 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114448967426250010, guid: ed4d9e34766395b4badff7b08d006880,
@@ -10321,6 +10327,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1316665914}
   smoothing: 5
+--- !u!4 &1733097240 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4474794454631558, guid: 0182fd969e68a1b4f9cd0ceef97398aa,
+    type: 2}
+  m_PrefabInternal: {fileID: 1431862834}
 --- !u!1001 &1776759161
 Prefab:
   m_ObjectHideFlags: 0
@@ -10374,6 +10385,16 @@ Prefab:
       propertyPath: recordText
       value: 
       objectReference: {fileID: 506623993}
+    - target: {fileID: 114317498125755464, guid: 0c4cca162c7b9f345918ebe6fe7f754d,
+        type: 2}
+      propertyPath: instanciateLocation
+      value: 
+      objectReference: {fileID: 1733097240}
+    - target: {fileID: 114629118761886206, guid: 0c4cca162c7b9f345918ebe6fe7f754d,
+        type: 2}
+      propertyPath: respawn
+      value: 
+      objectReference: {fileID: 295130638}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0c4cca162c7b9f345918ebe6fe7f754d, type: 2}
   m_IsPrefabParent: 0
