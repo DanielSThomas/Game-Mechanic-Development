@@ -5,13 +5,13 @@ using UnityEngine;
 public class ThirdPersonMovement : MonoBehaviour
 {
    
-    [SerializeField]private float speed = 8F;
-    [SerializeField]private Rigidbody rb;
+    [SerializeField]private float speed = 6F;
+    private Rigidbody rb;
     
 
     [SerializeField] private float jumpForce;
     [SerializeField] LayerMask raycastMask;
-    [SerializeField] private bool grounded;
+    private bool grounded;
 
     
     
@@ -21,9 +21,9 @@ public class ThirdPersonMovement : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
         rb = GetComponent<Rigidbody>();
         
-      
         grounded = false;
 
         
@@ -32,95 +32,79 @@ public class ThirdPersonMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
         //Movement
+        Movement();
 
-        float _zMovement = speed * Input.GetAxis("Vertical");
-        float _xMovement = speed * Input.GetAxis("Horizontal");
+        //Jumping
+        Jump();
 
-
-        Vector3 _forward = Camera.main.transform.forward.normalized;
-
-
-
-        Vector3 _right = Camera.main.transform.right.normalized;
-
-        Vector3 _verticalMovement = _forward * _zMovement *1.5f;
-
-        _verticalMovement.y = 0;
-
-        Vector3 _horizontalMovement = _right * _xMovement;
-
-        _horizontalMovement.y = 0;
-
-
-
-        Vector3 _velocity = _horizontalMovement + _verticalMovement;
-
-
-        
-
-        //Rotation
-
-        if (_velocity != Vector3.zero)
-        {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_velocity), 0.15F);
-        }
-        
-
-
-
-        if (_velocity != Vector3.zero)
-        {
-            rb.MovePosition(rb.position + _velocity * Time.deltaTime);
-        }
-        
-
+        //Unlock Mouse
         if (Input.GetKeyDown("escape"))
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
+    }
 
-        //Jumping
+    private void Movement()
+    {
+        float _zMovement = speed * Input.GetAxis("Vertical");
+        float _xMovement = speed * Input.GetAxis("Horizontal");
 
+        Vector3 _forward = Camera.main.transform.forward.normalized;
+
+        Vector3 _right = Camera.main.transform.right.normalized;
+
+        Vector3 _verticalMovement = _forward * _zMovement * 1.6f; //Movement compensation
+
+        _verticalMovement.y = 0;
+
+        Vector3 _horizontalMovement = _right * _xMovement;
+    
+        Vector3 _velocity = _horizontalMovement + _verticalMovement;
+
+        //Movement
+        if (_velocity != Vector3.zero)
+        {
+            rb.MovePosition(rb.position + _velocity * Time.deltaTime);
+        }
+
+        //Rotation
+        if (_velocity != Vector3.zero)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_velocity), 0.15F);
+        }
+
+    }
+
+    private void Jump()
+    {
         if (Input.GetButtonDown("Jump") && grounded == true)
         {
             rb.velocity = Vector3.up * jumpForce;
         }
 
+        //When we reach the peak of our jump, Increase gravity. (Used to make less floaty jumping)
         if (rb.velocity.y < 0)
         {
             rb.velocity += Vector3.up * Physics.gravity.y * (2 - 1) * Time.deltaTime;
-
-            
         }
+
+        //This makes it so we hold space we jump higher
         else if (rb.velocity.y > 0 && !Input.GetButton("Jump"))
         {
             rb.velocity += Vector3.up * Physics.gravity.y * (2 - 1) * Time.deltaTime;
         }
-
-
-
-
-
-        //Rotation
-
-     
     }
 
-    
-
-    private bool IsGrounded()
-    {
-        return Physics.Raycast(transform.position + new Vector3(0,-0.8f,0), -Vector3.up, 0.5f, raycastMask);      
-    }
-
+    #region GroundingChecks
+      
     private void OnCollisionStay(Collision collision)
     {
-        foreach (ContactPoint contact in collision.contacts)
+        foreach (ContactPoint contact in collision.contacts) //Get all collider contacts
         {
-            if(Vector3.Angle(contact.normal, Vector3.up) < 60)
+            if(Vector3.Angle(contact.normal, Vector3.up) < 60) //Any contacts that are facing upwards within a given angle
             {
                 grounded = true;
             }
@@ -132,9 +116,9 @@ public class ThirdPersonMovement : MonoBehaviour
         grounded = false;
     }
 
+    #endregion
 
 
-    
 
 
 }
