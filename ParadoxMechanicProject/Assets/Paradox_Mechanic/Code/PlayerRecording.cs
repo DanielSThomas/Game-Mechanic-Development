@@ -20,12 +20,11 @@ public class PlayerRecording : MonoBehaviour
     [SerializeField] private float recordTime;
     [SerializeField] private Transform respawn;
 
-    private List<Vector3> recordedPoints;
-    private List<Quaternion> recordedRotation;
+    [SerializeField] private List<Vector3> recordedPoints;
+    [SerializeField] private List<Quaternion> recordedRotation;
     private Vector3 point;
     private Quaternion rotation;
 
-  
     private float timer;
     private bool isRecording = false;
 
