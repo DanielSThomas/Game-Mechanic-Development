@@ -13,6 +13,8 @@ public class ThirdPersonMovement : MonoBehaviour
     [SerializeField] LayerMask raycastMask;
     [SerializeField] private bool grounded;
 
+    
+    
 
     // Use this for initialization
     void Start()
@@ -24,30 +26,39 @@ public class ThirdPersonMovement : MonoBehaviour
       
         grounded = false;
 
-
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         //Movement
 
         float _zMovement = speed * Input.GetAxis("Vertical");
         float _xMovement = speed * Input.GetAxis("Horizontal");
 
-        Vector3 _verticalMovement = Camera.main.transform.forward * _zMovement;
+
+        Vector3 _forward = Camera.main.transform.forward.normalized;
+
+
+
+        Vector3 _right = Camera.main.transform.right.normalized;
+
+        Vector3 _verticalMovement = _forward * _zMovement *1.5f;
 
         _verticalMovement.y = 0;
 
-        Vector3 _horizontalMovement = Quaternion.Euler(new Vector3(0,90,0)) * _verticalMovement;
+        Vector3 _horizontalMovement = _right * _xMovement;
 
-        
+        _horizontalMovement.y = 0;
 
-        
+
 
         Vector3 _velocity = _horizontalMovement + _verticalMovement;
 
 
+        
 
         //Rotation
 
@@ -123,7 +134,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
 
 
-
+    
 
 
 }
