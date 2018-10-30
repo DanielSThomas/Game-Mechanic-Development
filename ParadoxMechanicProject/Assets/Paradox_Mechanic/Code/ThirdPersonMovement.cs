@@ -4,19 +4,17 @@ using UnityEngine;
 
 public class ThirdPersonMovement : MonoBehaviour
 {
-   
-    [SerializeField]private float speed = 6F;
+    // Variables---------------------------------------------------------------
+    [SerializeField]private float speed = 6;
+    [SerializeField]private float jumpForce = 5;
+
+    [SerializeField] LayerMask raycastMask;
+
     private Rigidbody rb;
     
-
-    [SerializeField] private float jumpForce;
-    [SerializeField] LayerMask raycastMask;
     private bool grounded;
 
-    
-    
-
-    // Use this for initialization
+    // Initialization----------------------------------------------------------
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -25,11 +23,10 @@ public class ThirdPersonMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         
         grounded = false;
-
         
     }
 
-    // Update is called once per frame
+    // Update------------------------------------------------------------------
     void Update()
     {
 
@@ -46,6 +43,9 @@ public class ThirdPersonMovement : MonoBehaviour
             Cursor.visible = true;
         }
     }
+
+    // Methods----------------------------------------------------------------
+    #region Private Methods
 
     private void Movement()
     {
@@ -118,7 +118,6 @@ public class ThirdPersonMovement : MonoBehaviour
 
     #endregion
 
-
-
+#endregion
 
 }

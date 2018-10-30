@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class ParadoxAI : MonoBehaviour
 {
-    [SerializeField]private List<Vector3> localRecordedPoints;
-    [SerializeField]private List<Quaternion> localRotationPoints;
+    // Variables---------------------------------------------------------------
+    [Range(0.01f, 0.1f)]
+    [SerializeField]
+    private float accuracy;
+
+    private List<Vector3> localRecordedPoints;
+    private List<Quaternion> localRotationPoints;
 
     private PlayerRecording pr;
 
-    [Range(0.01f,0.1f)]
-    [SerializeField] private float accuracy; 
-
-    // Use this for initialization
+    
+    // Initialization----------------------------------------------------------
     void Start ()
     {
         pr = GameObject.Find("Player").GetComponent<PlayerRecording>();
@@ -23,14 +26,8 @@ public class ParadoxAI : MonoBehaviour
         
         StartCoroutine("Movement");
     }
-	
-	// Update is called once per frame
-	void Update ()
-    { 
-       
-        
-    }
 
+    // Coroutines--------------------------------------------------------------
     IEnumerator Movement()
     {
         for(; ; )
@@ -52,6 +49,5 @@ public class ParadoxAI : MonoBehaviour
             yield return new WaitForSeconds(accuracy);
 
         }
-
     }
 }
