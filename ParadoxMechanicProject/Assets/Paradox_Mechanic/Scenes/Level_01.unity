@@ -3689,7 +3689,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh36094
+  m_Name: pb_Mesh4854
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -10430,7 +10430,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh36138
+  m_Name: pb_Mesh4908
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -10771,6 +10771,11 @@ Prefab:
       propertyPath: respawn
       value: 
       objectReference: {fileID: 295130638}
+    - target: {fileID: 114868110493061006, guid: 04e5fe4db24cb7b4da307dae8671058f,
+        type: 2}
+      propertyPath: speed
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 04e5fe4db24cb7b4da307dae8671058f, type: 2}
   m_IsPrefabParent: 0
@@ -10951,7 +10956,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1753281383}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.0000029504295}
-  m_LocalPosition: {x: 5.8140764, y: 9.517395, z: -53.067482}
+  m_LocalPosition: {x: 5.8140764, y: 9.517395, z: -54.07}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1380922491}
@@ -12721,7 +12726,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1971022504}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.0000029504295}
-  m_LocalPosition: {x: 0.8140764, y: 9.517395, z: -52.067482}
+  m_LocalPosition: {x: 0.8140764, y: 9.517395, z: -51.07}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1380922491}
