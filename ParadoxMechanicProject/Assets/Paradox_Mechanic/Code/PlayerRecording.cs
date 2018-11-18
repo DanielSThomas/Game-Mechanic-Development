@@ -26,6 +26,7 @@ public class PlayerRecording : MonoBehaviour
 
     private float timer;
     private bool isRecording = false;
+    [SerializeField]private bool recordcooldown = false;
 
     private ParadoxCreator paradoxCreator;
 
@@ -62,12 +63,13 @@ public class PlayerRecording : MonoBehaviour
 
     private void Recording()
     {
-        if (Input.GetButton("Record") && isRecording == false)
+        if (Input.GetButton("Record") && isRecording == false && recordcooldown == false)
         {
             StartCoroutine("RecordPoints");
             recordedPoints.Clear();
             recordedRotation.Clear();
             isRecording = true;
+            recordcooldown = true;
 
             Invoke("RecordEnd", recordTime);
 
@@ -77,10 +79,11 @@ public class PlayerRecording : MonoBehaviour
         }
 
         //Override Recording
-        if (Input.GetButton("RecordEnd") && isRecording == true)
+        if (Input.GetButton("Record") && isRecording == true && timer <4.5f && timer >0)
         {
             RecordEnd();
             CancelInvoke();
+            Invoke("RestartCoolDown", 0.5f);
         }
 
     }
@@ -91,6 +94,7 @@ public class PlayerRecording : MonoBehaviour
         {
             StopCoroutine("RecordPoints");
 
+            Invoke("RestartCoolDown", 0.5f);
 
             isRecording = false;
             transform.position = recordedPoints[0];
@@ -110,6 +114,12 @@ public class PlayerRecording : MonoBehaviour
         timer -= Time.deltaTime;
         recordText.text = timer.ToString("0");
     }
+
+    private void RestartCoolDown()
+    {
+        recordcooldown = false;
+    }
+       
 
     #endregion
 
