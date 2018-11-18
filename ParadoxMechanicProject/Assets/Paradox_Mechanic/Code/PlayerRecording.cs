@@ -17,8 +17,7 @@ public class PlayerRecording : MonoBehaviour
 
     // Variables---------------------------------------------------------------
     [SerializeField] private float recordAccuracy;
-    [SerializeField] private float recordTime;
-    [SerializeField] private Transform respawn;
+    [SerializeField] private float recordTime; 
 
     [SerializeField] private List<Vector3> recordedPoints;
     [SerializeField] private List<Quaternion> recordedRotation;

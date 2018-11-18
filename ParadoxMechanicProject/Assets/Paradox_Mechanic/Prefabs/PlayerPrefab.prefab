@@ -395,7 +395,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef070c37874536e46bf8c5505bf9b56a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 6
+  speed: 5
   jumpForce: 5.5
   raycastMask:
     serializedVersion: 2
