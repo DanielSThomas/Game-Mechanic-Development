@@ -24,7 +24,7 @@ public class PlayerRecording : MonoBehaviour
     private Vector3 point;
     private Quaternion rotation;
 
-    private float timer;
+    private float timer; // Should optimise this in some way. Atm the timer is always running :/
     private bool isRecording = false;
     [SerializeField]private bool recordcooldown = false;
 
@@ -79,11 +79,11 @@ public class PlayerRecording : MonoBehaviour
         }
 
         //Override Recording
-        if (Input.GetButton("Record") && isRecording == true && timer <4.5f && timer >0)
+        if (Input.GetButton("Record") && isRecording == true && timer <4.5f && timer >0) //The timer varrible here is being used as a input buffer to prevent both actions happeing at once.
         {
             RecordEnd();
-            CancelInvoke();
-            Invoke("RestartCoolDown", 0.5f);
+            CancelInvoke(); // Best Built in Method
+            Invoke("RestartCoolDown", 0.5f); // For some reason this is not being called in the RecordEnd() when going though the Override. So I am calling it again here.
         }
 
     }
@@ -109,13 +109,13 @@ public class PlayerRecording : MonoBehaviour
 
     }
 
-    private void Timer()
+    private void Timer() // Simple timer
     {
         timer -= Time.deltaTime;
         recordText.text = timer.ToString("0");
     }
 
-    private void RestartCoolDown()
+    private void RestartCoolDown() // Again used to buffer the input
     {
         recordcooldown = false;
     }

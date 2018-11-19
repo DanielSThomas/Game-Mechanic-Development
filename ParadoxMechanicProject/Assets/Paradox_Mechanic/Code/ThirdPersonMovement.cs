@@ -2,8 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class ThirdPersonMovement : MonoBehaviour
 {
+
+    // Visual Variables--------------------------------------------------------
+
+    [SerializeField]private Animator animator;
+
+
+
     // Variables---------------------------------------------------------------
     [SerializeField]private float speed = 6;
     [SerializeField]private float jumpForce = 5;
@@ -23,7 +31,10 @@ public class ThirdPersonMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         
         grounded = false;
-        
+
+
+       
+
     }
 
     // Update------------------------------------------------------------------
@@ -83,7 +94,23 @@ public class ThirdPersonMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump") && grounded == true)
         {
             rb.velocity = Vector3.up * jumpForce;
+
+            
         }
+
+        if (grounded == false)
+        {
+            animator.SetBool("Jumping", true);
+            animator.SetBool("Landing", false);
+        }
+            
+
+        if (grounded == true)
+        {
+            animator.SetBool("Jumping", false);
+            animator.SetBool("Landing", true);
+        }
+         
 
         //When we reach the peak of our jump, Increase gravity. (Used to make less floaty jumping)
         if (rb.velocity.y < 0)
