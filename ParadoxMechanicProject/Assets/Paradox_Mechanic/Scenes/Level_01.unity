@@ -11652,6 +11652,18 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114132991042516752, guid: 04e5fe4db24cb7b4da307dae8671058f,
+        type: 2}
+      propertyPath: MarkerOB
+      value: 
+      objectReference: {fileID: 1920711258208296, guid: c296162747eb7ad4abf6a0d1c0211b49,
+        type: 2}
+    - target: {fileID: 114132991042516752, guid: 04e5fe4db24cb7b4da307dae8671058f,
+        type: 2}
+      propertyPath: markerOB
+      value: 
+      objectReference: {fileID: 1920711258208296, guid: c296162747eb7ad4abf6a0d1c0211b49,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 04e5fe4db24cb7b4da307dae8671058f, type: 2}
   m_IsPrefabParent: 0

@@ -100,7 +100,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
         if (grounded == false)
         {
-            animator.SetBool("Jumping", true);
+            animator.SetBool("Jumping", true); // google better method for this later
             animator.SetBool("Landing", false);
         }
             

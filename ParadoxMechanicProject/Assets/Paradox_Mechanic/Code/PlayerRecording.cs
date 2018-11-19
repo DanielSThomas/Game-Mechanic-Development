@@ -30,6 +30,9 @@ public class PlayerRecording : MonoBehaviour
 
     private ParadoxCreator paradoxCreator;
 
+    [SerializeField] private GameObject markerOB;
+    GameObject markerCopy;
+
     private Scene loadedscene;
 
     // Initialization---------------------------------------------------------
@@ -76,6 +79,8 @@ public class PlayerRecording : MonoBehaviour
             ppb.profile = profileRecording;
             recordText.enabled = true;
             timer = 5f;
+
+            markerCopy = Instantiate(markerOB, transform.position, transform.rotation);
         }
 
         //Override Recording
@@ -103,6 +108,9 @@ public class PlayerRecording : MonoBehaviour
 
             ppb.profile = profileNormal;
             recordText.enabled = false;
+
+            Destroy(markerCopy);
+            
         }
         else
             return;
@@ -119,7 +127,9 @@ public class PlayerRecording : MonoBehaviour
     {
         recordcooldown = false;
     }
-       
+
+    
+
 
     #endregion
 
