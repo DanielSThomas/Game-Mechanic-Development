@@ -108,6 +108,7 @@ GameObject:
   - component: {fileID: 4655768804558240}
   - component: {fileID: 33084681554687160}
   - component: {fileID: 23900618510608110}
+  - component: {fileID: 95778445666190276}
   m_Layer: 0
   m_Name: PlayerMesh
   m_TagString: Untagged
@@ -150,7 +151,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1951999925737672}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.011532}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4739893325115962}
@@ -352,6 +353,24 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1748330424500190}
   m_Enabled: 1
+--- !u!95 &95778445666190276
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1951999925737672}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 25196d9623a6256489579d309a91f04a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114132991042516752
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -372,6 +391,7 @@ MonoBehaviour:
   recordedPoints: []
   recordedRotation: []
   recordcooldown: 0
+  markerOB: {fileID: 1920711258208296, guid: c296162747eb7ad4abf6a0d1c0211b49, type: 2}
 --- !u!114 &114215838421579930
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -424,6 +444,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef070c37874536e46bf8c5505bf9b56a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 95778445666190276}
   speed: 5
   jumpForce: 5.5
   raycastMask:
