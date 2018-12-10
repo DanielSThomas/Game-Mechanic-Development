@@ -9420,7 +9420,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh14344
+  m_Name: pb_Mesh25788
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -11677,6 +11677,14 @@ Prefab:
       propertyPath: recordText
       value: 
       objectReference: {fileID: 506623993}
+    - target: {fileID: 1361410822869162, guid: 04e5fe4db24cb7b4da307dae8671058f, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1951999925737672, guid: 04e5fe4db24cb7b4da307dae8671058f, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 04e5fe4db24cb7b4da307dae8671058f, type: 2}
   m_IsPrefabParent: 0
