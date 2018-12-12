@@ -19,8 +19,10 @@ public class ThirdPersonMovement : MonoBehaviour
     [SerializeField] LayerMask raycastMask;
 
     private Rigidbody rb;
-    
-    private bool grounded;
+
+    private Vector3 _lastvel;
+
+    private bool dashactive;
 
     // Initialization----------------------------------------------------------
     void Start()
@@ -30,7 +32,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
         rb = GetComponent<Rigidbody>();
         
-        grounded = false;
+       
 
 
        
@@ -44,8 +46,8 @@ public class ThirdPersonMovement : MonoBehaviour
         //Movement
         Movement();
 
-        //Jumping
-        Jump();
+        //Dash
+        Dash();
 
         //Unlock Mouse
         if (Input.GetKeyDown("escape"))
@@ -56,95 +58,63 @@ public class ThirdPersonMovement : MonoBehaviour
     }
 
     // Methods----------------------------------------------------------------
-    #region Private Methods
+    
 
     private void Movement()
     {
+       // _lastvel = Vector3.zero;
         float _zMovement = speed * Input.GetAxis("Vertical");
         float _xMovement = speed * Input.GetAxis("Horizontal");
 
-        Vector3 _forward = Camera.main.transform.forward.normalized;
 
-        Vector3 _right = Camera.main.transform.right.normalized;
-
-        Vector3 _verticalMovement = _forward * _zMovement * 1.6f; //Movement compensation
-
-        _verticalMovement.y = 0;
-
-        Vector3 _horizontalMovement = _right * _xMovement;
-    
-        Vector3 _velocity = _horizontalMovement + _verticalMovement;
+        Vector3 _velocity = new Vector3(_xMovement,0, _zMovement);
+        
+        
 
         //Movement
-        if (_velocity != Vector3.zero)
+        if (_velocity != Vector3.zero && dashactive == false)
         {
             rb.MovePosition(rb.position + _velocity * Time.deltaTime);
+            _lastvel = _velocity;
+
+            
         }
+        else if(dashactive == true)
+        {
+            rb.MovePosition(rb.position + _lastvel * Time.deltaTime * speed);
+        }
+            
+
+
 
         //Rotation
-        if (_velocity != Vector3.zero)
+        if (_velocity != Vector3.zero && dashactive == false)
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_velocity), 0.15F);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_velocity), 0.5F);
         }
 
     }
 
-    private void Jump()
+    private void Dash()
     {
-        if (Input.GetButtonDown("Jump") && grounded == true)
+        if (Input.GetButtonDown("Jump"))
         {
-            rb.velocity = Vector3.up * jumpForce;
-
-            
-        }
-
-        if (grounded == false)
-        {
-            animator.SetBool("Jumping", true); // google better method for this later
-            animator.SetBool("Landing", false);
-        }
-            
-
-        if (grounded == true)
-        {
-            animator.SetBool("Jumping", false);
-            animator.SetBool("Landing", true);
+            //speed = 14;
+            rb.useGravity = false;
+            Invoke("DashEnd", 0.2f);
+            dashactive = true;
         }
          
-
-        //When we reach the peak of our jump, Increase gravity. (Used to make less floaty jumping)
-        if (rb.velocity.y < 0)
-        {
-            rb.velocity += Vector3.up * Physics.gravity.y * (2 - 1) * Time.deltaTime;
-        }
-
-        //This makes it so we hold space we jump higher
-        else if (rb.velocity.y > 0 && !Input.GetButton("Jump"))
-        {
-            rb.velocity += Vector3.up * Physics.gravity.y * (2 - 1) * Time.deltaTime;
-        }
     }
 
-    #region GroundingChecks
-      
-    private void OnCollisionStay(Collision collision)
+    private void DashEnd()
     {
-        foreach (ContactPoint contact in collision.contacts) //Get all collider contacts
-        {
-            if(Vector3.Angle(contact.normal, Vector3.up) < 60) //Any contacts that are facing upwards within a given angle
-            {
-                grounded = true;
-            }
-        }
+        speed = 6;
+        rb.useGravity = true;
+        dashactive = false;
     }
 
-    private void OnCollisionExit(Collision collision)
-    {
-        grounded = false;
-    }
+   
 
-    #endregion
-
-#endregion
 
 }
