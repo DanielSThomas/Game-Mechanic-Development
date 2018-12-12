@@ -9,9 +9,7 @@ public class PlayerRecording : MonoBehaviour
 {
 
     // VisualEffect Variables -------------------------------------------------
-    [SerializeField]private PostProcessingProfile profileNormal;
-    [SerializeField]private PostProcessingProfile profileRecording;
-    [SerializeField]private PostProcessingBehaviour ppb;
+    
 
     [SerializeField]private Text recordText;
 
@@ -27,11 +25,11 @@ public class PlayerRecording : MonoBehaviour
     private float timer; // Should optimise this in some way. Atm the timer is always running :/
     private bool isRecording = false;
     [SerializeField]private bool recordcooldown = false;
+    private bool started = false;
 
     private ParadoxCreator paradoxCreator;
 
-    [SerializeField] private GameObject markerOB;
-    GameObject markerCopy;
+   
 
     private Scene loadedscene;
 
@@ -49,7 +47,7 @@ public class PlayerRecording : MonoBehaviour
 	// Update-----------------------------------------------------------------
 	void Update ()
     {
-
+        
         Recording();
 
         Timer();
@@ -66,7 +64,7 @@ public class PlayerRecording : MonoBehaviour
 
     private void Recording()
     {
-        if (Input.GetButton("Record") && isRecording == false && recordcooldown == false)
+        if (started == true && isRecording == false && recordcooldown == false)
         {
             StartCoroutine("RecordPoints");
             recordedPoints.Clear();
@@ -76,20 +74,14 @@ public class PlayerRecording : MonoBehaviour
 
             Invoke("RecordEnd", recordTime);
 
-            ppb.profile = profileRecording;
+            
             recordText.enabled = true;
             timer = 5f;
 
-            markerCopy = Instantiate(markerOB, transform.position, transform.rotation);
+           
         }
 
-        //Override Recording
-        if (Input.GetButton("Record") && isRecording == true && timer <4.5f && timer >0) //The timer varrible here is being used as a input buffer to prevent both actions happeing at once.
-        {
-            RecordEnd();
-            CancelInvoke(); // Best Built in Method
-            Invoke("RestartCoolDown", 0.5f); // For some reason this is not being called in the RecordEnd() when going though the Override. So I am calling it again here.
-        }
+       
 
     }
 
@@ -106,10 +98,10 @@ public class PlayerRecording : MonoBehaviour
             transform.rotation = recordedRotation[0];
             paradoxCreator.CreateClone();
 
-            ppb.profile = profileNormal;
+            
             recordText.enabled = false;
 
-            Destroy(markerCopy);
+            
             
         }
         else
@@ -184,6 +176,14 @@ public class PlayerRecording : MonoBehaviour
 
             yield return new WaitForSeconds(recordAccuracy);
     
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Start")
+        {
+            started = true;
         }
     }
 }
