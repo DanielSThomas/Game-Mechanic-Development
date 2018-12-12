@@ -9,9 +9,11 @@ public class PlayerRecording : MonoBehaviour
 {
 
     // VisualEffect Variables -------------------------------------------------
-    
-
+    [SerializeField] private PostProcessingProfile profileNormal;
+    [SerializeField] private PostProcessingProfile profileRecording;
+    [SerializeField] private PostProcessingBehaviour ppb;
     [SerializeField]private Text recordText;
+    [SerializeField] private Text timeText;
 
     // Variables---------------------------------------------------------------
     [SerializeField] private float recordAccuracy;
@@ -23,13 +25,16 @@ public class PlayerRecording : MonoBehaviour
     private Quaternion rotation;
 
     private float timer; // Should optimise this in some way. Atm the timer is always running :/
+    private float timer2;
     private bool isRecording = false;
     [SerializeField]private bool recordcooldown = false;
-    private bool started = false;
+   
 
     private ParadoxCreator paradoxCreator;
 
-   
+    [SerializeField] private GameObject markerOB;
+    GameObject markerCopy;
+
 
     private Scene loadedscene;
 
@@ -37,6 +42,8 @@ public class PlayerRecording : MonoBehaviour
     void Start () 
     {
         paradoxCreator = GetComponent<ParadoxCreator>();
+
+
 
         recordText.enabled = false;
 
@@ -52,6 +59,8 @@ public class PlayerRecording : MonoBehaviour
 
         Timer();
 
+        Timer2();
+
         //Restart Scene
         if (Input.GetButton("Restart") && isRecording == false)
         {
@@ -64,24 +73,30 @@ public class PlayerRecording : MonoBehaviour
 
     private void Recording()
     {
-        if (started == true && isRecording == false && recordcooldown == false)
+        if (Input.GetButtonDown("Record") && isRecording == false && recordcooldown == false)
         {
             StartCoroutine("RecordPoints");
             recordedPoints.Clear();
             recordedRotation.Clear();
             isRecording = true;
             recordcooldown = true;
-
+            ppb.profile = profileRecording;
             Invoke("RecordEnd", recordTime);
 
             
             recordText.enabled = true;
             timer = 5f;
 
-           
+            markerCopy = Instantiate(markerOB, transform.position, transform.rotation);
         }
 
-       
+        //Override Recording
+        if (Input.GetButton("Record") && isRecording == true && timer < 4.5f && timer > 0) //The timer varrible here is being used as a input buffer to prevent both actions happeing at once.
+        {
+            RecordEnd();
+            CancelInvoke(); // Best Built in Method
+            Invoke("RestartCoolDown", 0.5f); // For some reason this is not being called in the RecordEnd() when going though the Override. So I am calling it again here.
+        }
 
     }
 
@@ -97,12 +112,12 @@ public class PlayerRecording : MonoBehaviour
             transform.position = recordedPoints[0];
             transform.rotation = recordedRotation[0];
             paradoxCreator.CreateClone();
+            ppb.profile = profileNormal;
 
-            
             recordText.enabled = false;
 
-            
-            
+            Destroy(markerCopy);
+
         }
         else
             return;
@@ -113,6 +128,12 @@ public class PlayerRecording : MonoBehaviour
     {
         timer -= Time.deltaTime;
         recordText.text = timer.ToString("0");
+    }
+    
+    private void Timer2()
+    {
+        timer2 += Time.deltaTime;
+        timeText.text = timer2.ToString("0");
     }
 
     private void RestartCoolDown() // Again used to buffer the input
@@ -179,11 +200,5 @@ public class PlayerRecording : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.tag == "Start")
-        {
-            started = true;
-        }
-    }
+   
 }

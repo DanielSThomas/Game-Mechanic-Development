@@ -120,8 +120,8 @@ public class ThirdPersonMovement : MonoBehaviour
             Invoke("CooldownEnd", 1f);
             dashactive = true;
             cooldown = true;
-            minDashWindow = 0.5f;
-            maxDashWindow = 0.8f;
+            minDashWindow = 0.4f;
+            maxDashWindow = 0.6f;
 
             chainWindow = 0;
             chainActive = true;
