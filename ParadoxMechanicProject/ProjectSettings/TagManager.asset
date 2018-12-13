@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - wall
+  - RecordButton
   layers:
   - Default
   - TransparentFX

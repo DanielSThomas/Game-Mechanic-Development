@@ -89,7 +89,7 @@ public class PlayerRecording : MonoBehaviour
             ppb.profile = profileRecording;
             Invoke("RecordEnd", recordTime);
 
-            
+            paradoxCreator.IncreaseCounter();
             recordText.enabled = true;
             timer = 5f;
 

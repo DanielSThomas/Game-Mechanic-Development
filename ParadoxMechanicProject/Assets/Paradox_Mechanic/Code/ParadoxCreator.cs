@@ -7,18 +7,20 @@ public class ParadoxCreator : MonoBehaviour
     // Variables---------------------------------------------------------------
     [SerializeField]private GameObject instanciateOB;
     [SerializeField]private Transform instanciateLocation;
-    [SerializeField]private int maxClones;
+    [SerializeField]private int maxRecords;
 
     [SerializeField]private List<GameObject> allinstanciates;
+    [SerializeField] private int recordCounter;
 
     // Update------------------------------------------------------------------
     void Update ()
     {
 
-        if (allinstanciates.Count > maxClones)
+        if (recordCounter > maxRecords)
         {
             Destroy(allinstanciates[0]);
             allinstanciates.RemoveAt(0);
+            recordCounter -= 1;
         }
 
     }
@@ -36,6 +38,12 @@ public class ParadoxCreator : MonoBehaviour
     public void CreateClone()
     {
         InstanciateObject();
+       
+    }
+
+    public void IncreaseCounter()
+    {
+        recordCounter += 1;
     }
 
     
