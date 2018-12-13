@@ -29,6 +29,7 @@ public class ThirdPersonMovement : MonoBehaviour
     private bool dashactive;
     private bool crashed;
     
+    
     [SerializeField]private bool chainActive = false;
     
     [SerializeField]private float chainWindow;
@@ -102,6 +103,7 @@ public class ThirdPersonMovement : MonoBehaviour
             rb.MovePosition(rb.position + _lastvel * Time.deltaTime * 5);
             
         }
+     
         else if(crashed == true)
         {
             rb.MovePosition(rb.position + Vector3.zero);
@@ -137,6 +139,7 @@ public class ThirdPersonMovement : MonoBehaviour
             rb.useGravity = false;
             Invoke("DashEnd", 0.15f);
             Invoke("CooldownEnd", 0.6f);
+            
             dashactive = true;
             cooldown = true;
             minDashWindow = 0.4f;
@@ -155,7 +158,7 @@ public class ThirdPersonMovement : MonoBehaviour
             {
                 minDashWindow -= 0.02f;
                 maxDashWindow -= 0.02f;
-            }
+            }         
             Invoke("DashEnd", 0.15f);
             Invoke("CooldownEnd", 0.6f);
             
@@ -208,10 +211,11 @@ public class ThirdPersonMovement : MonoBehaviour
 
     private void CrashEnd()
     {
-        crashed = false;
-        
-        
+        crashed = false;             
     }
+
+ 
+
     private void OnTriggerEnter(Collider other)
     {
         if (dashactive == true && crashed == false && other.tag == "wall")
