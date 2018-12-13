@@ -30,7 +30,7 @@ public class ThirdPersonMovement : MonoBehaviour
     private bool crashed;
     
     [SerializeField]private bool chainActive = false;
-    [SerializeField]private float chain;
+    
     [SerializeField]private float chainWindow;
 
     private float minDashWindow;
