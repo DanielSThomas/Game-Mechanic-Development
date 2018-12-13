@@ -78,11 +78,12 @@ public class ThirdPersonMovement : MonoBehaviour
     private void Movement()
     {
        // _lastvel = Vector3.zero;
-        float _zMovement = speed* 1.2f * Input.GetAxis("Vertical");
-        float _xMovement = speed * Input.GetAxis("Horizontal");
+        float _zMovement = Input.GetAxis("Vertical");
+        float _xMovement = Input.GetAxis("Horizontal");
 
+        Vector3 _DashVelocity = new Vector3(_xMovement* 9, 0, _zMovement * 10.8f);
 
-        Vector3 _velocity = new Vector3(_xMovement,0, _zMovement);
+        Vector3 _velocity = new Vector3(_xMovement* speed,0, _zMovement* speed * 1.2f);
         
         
 
@@ -90,13 +91,16 @@ public class ThirdPersonMovement : MonoBehaviour
         if (_velocity != Vector3.zero && dashactive == false && crashed == false)
         {
             rb.MovePosition(rb.position + _velocity * Time.deltaTime);
-            _lastvel = _velocity;
+            //_lastvel = _velocity;
+            _lastvel = _DashVelocity;
 
-            
+
         }
         else if(dashactive == true && crashed == false)
         {
-            rb.MovePosition(rb.position + _lastvel * Time.deltaTime * speed * 1.5f);
+           
+            rb.MovePosition(rb.position + _lastvel * Time.deltaTime * 5);
+            
         }
         else if(crashed == true)
         {
@@ -128,11 +132,11 @@ public class ThirdPersonMovement : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && cooldown == false && crashed == false && chainActive == false && isGrounded == true)
         {
+            speed = 0.1f;
             
-            //speed = 14;
             rb.useGravity = false;
             Invoke("DashEnd", 0.15f);
-            Invoke("CooldownEnd", 1f);
+            Invoke("CooldownEnd", 0.6f);
             dashactive = true;
             cooldown = true;
             minDashWindow = 0.4f;
@@ -143,6 +147,7 @@ public class ThirdPersonMovement : MonoBehaviour
         }
         else if (Input.GetButtonDown("Jump") && chainActive == true && crashed == false && chainWindow > minDashWindow && chainWindow < maxDashWindow && isGrounded == true)
         {
+            speed = 0.1f;
             dashactive = true;
             chainWindow = 0;
             CancelInvoke();
@@ -152,12 +157,14 @@ public class ThirdPersonMovement : MonoBehaviour
                 maxDashWindow -= 0.02f;
             }
             Invoke("DashEnd", 0.15f);
-            Invoke("CooldownEnd", 1f);
+            Invoke("CooldownEnd", 0.6f);
             
         }
         else if (Input.GetButtonDown("Jump") && crashed == false && chainActive == true && chainWindow < minDashWindow)
         {
-            chainActive = false;          
+            
+            chainActive = false;
+            
         }
         
 
@@ -186,7 +193,8 @@ public class ThirdPersonMovement : MonoBehaviour
         
         rb.useGravity = true;
         dashactive = false;
-      
+        
+        
     }
 
  
@@ -195,7 +203,7 @@ public class ThirdPersonMovement : MonoBehaviour
     private void CooldownEnd()
     {
         cooldown = false;
-        
+        speed = 6;
     }
 
     private void CrashEnd()
@@ -234,7 +242,7 @@ public class ThirdPersonMovement : MonoBehaviour
         isGrounded = false;
     }
 
-
+   
 
 
 
