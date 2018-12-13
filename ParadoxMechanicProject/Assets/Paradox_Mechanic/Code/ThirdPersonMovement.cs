@@ -15,6 +15,7 @@ public class ThirdPersonMovement : MonoBehaviour
     // Variables---------------------------------------------------------------
     [SerializeField]private float speed = 6;
     [SerializeField]private float jumpForce = 5;
+    private bool isGrounded;
 
     [SerializeField] LayerMask raycastMask;
 
@@ -57,7 +58,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
         //Movement
         Movement();
-
+        
         //Dash
         Dash();
 
@@ -125,7 +126,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
 
 
-        if (Input.GetButtonDown("Jump") && cooldown == false && crashed == false && chainActive == false)
+        if (Input.GetButtonDown("Jump") && cooldown == false && crashed == false && chainActive == false && isGrounded == true)
         {
             
             //speed = 14;
@@ -140,7 +141,7 @@ public class ThirdPersonMovement : MonoBehaviour
             chainWindow = 0;
             chainActive = true;
         }
-        else if (Input.GetButtonDown("Jump") && chainActive == true && crashed == false && chainWindow > minDashWindow && chainWindow < maxDashWindow)
+        else if (Input.GetButtonDown("Jump") && chainActive == true && crashed == false && chainWindow > minDashWindow && chainWindow < maxDashWindow && isGrounded == true)
         {
             dashactive = true;
             chainWindow = 0;
@@ -217,7 +218,24 @@ public class ThirdPersonMovement : MonoBehaviour
         }
     }
 
-  
+    private void OnCollisionStay(Collision collision)
+    {
+        foreach (ContactPoint contact in collision.contacts)
+        {
+            if (Vector3.Angle(contact.normal, Vector3.up) < 60)
+            {
+                isGrounded = true;
+            }
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        isGrounded = false;
+    }
+
+
+
 
 
 }

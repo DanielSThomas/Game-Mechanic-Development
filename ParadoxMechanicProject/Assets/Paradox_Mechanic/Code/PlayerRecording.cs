@@ -51,9 +51,14 @@ public class PlayerRecording : MonoBehaviour
         loadedscene = SceneManager.GetActiveScene();
 
     }
-	
-	// Update-----------------------------------------------------------------
-	void Update ()
+
+    private void LateUpdate()
+    {
+        onRecordButton = false;
+    }
+
+    // Update-----------------------------------------------------------------
+    void Update ()
     {
         
         Recording();
@@ -207,10 +212,7 @@ public class PlayerRecording : MonoBehaviour
         {
             onRecordButton = true;
         }
-        else
-        {
-            onRecordButton = false;
-        }
+      
     }
 
 
