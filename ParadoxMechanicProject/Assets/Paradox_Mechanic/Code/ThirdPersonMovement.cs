@@ -110,10 +110,24 @@ public class ThirdPersonMovement : MonoBehaviour
 
     }
 
+   
+
     private void Dash()
     {
+        if (cooldown == false && crashed == false && chainActive == false)
+        {
+            Obrenderer.material.color = Color.blue;
+        }
+        else if (cooldown == true && crashed == false && chainActive == true)
+        {
+            Obrenderer.material.color = Color.cyan;
+        }
+
+
+
         if (Input.GetButtonDown("Jump") && cooldown == false && crashed == false && chainActive == false)
         {
+            
             //speed = 14;
             rb.useGravity = false;
             Invoke("DashEnd", 0.15f);
@@ -133,8 +147,8 @@ public class ThirdPersonMovement : MonoBehaviour
             CancelInvoke();
             if (minDashWindow > 0.2)
             {
-                minDashWindow -= 0.03f;
-                maxDashWindow -= 0.03f;
+                minDashWindow -= 0.02f;
+                maxDashWindow -= 0.02f;
             }
             Invoke("DashEnd", 0.15f);
             Invoke("CooldownEnd", 1f);
@@ -155,7 +169,7 @@ public class ThirdPersonMovement : MonoBehaviour
         if (chainActive == true)
         {
             chainWindow += Time.deltaTime;
-            if (chainWindow > 2)
+            if (chainWindow > 0.7f)
             {             
                 chainActive = false;
             }
@@ -180,21 +194,25 @@ public class ThirdPersonMovement : MonoBehaviour
     private void CooldownEnd()
     {
         cooldown = false;
+        
     }
 
     private void CrashEnd()
     {
         crashed = false;
-        Obrenderer.material.color = Color.gray;
+        
+        
     }
     private void OnTriggerEnter(Collider other)
     {
         if (dashactive == true && crashed == false && other.tag == "wall")
         {
+            
             //CancelInvoke();
             chainActive = false;
             crashed = true;
-            Invoke("CrashEnd", 0.3f);
+
+            Invoke("CrashEnd", 0.5f);
             Obrenderer.material.color = Color.red;
         }
     }
