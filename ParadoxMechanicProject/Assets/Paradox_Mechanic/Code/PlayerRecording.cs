@@ -32,11 +32,12 @@ public class PlayerRecording : MonoBehaviour
 
     private ParadoxCreator paradoxCreator;
 
-    [SerializeField] private GameObject markerOB;
-    GameObject markerCopy;
+   
 
 
     private Scene loadedscene;
+
+    private bool onRecordButton;
 
     // Initialization---------------------------------------------------------
     void Start () 
@@ -73,7 +74,7 @@ public class PlayerRecording : MonoBehaviour
 
     private void Recording()
     {
-        if (Input.GetButtonDown("Record") && isRecording == false && recordcooldown == false)
+        if (Input.GetButtonDown("Record") && isRecording == false && recordcooldown == false && onRecordButton == true)
         {
             StartCoroutine("RecordPoints");
             recordedPoints.Clear();
@@ -87,7 +88,7 @@ public class PlayerRecording : MonoBehaviour
             recordText.enabled = true;
             timer = 5f;
 
-            markerCopy = Instantiate(markerOB, transform.position, transform.rotation);
+            
         }
 
         //Override Recording
@@ -116,7 +117,7 @@ public class PlayerRecording : MonoBehaviour
 
             recordText.enabled = false;
 
-            Destroy(markerCopy);
+           
 
         }
         else
@@ -200,5 +201,17 @@ public class PlayerRecording : MonoBehaviour
         }
     }
 
-   
+    private void OnTriggerStay(Collider other)
+    {
+        if(other.gameObject.tag == "RecordButton")
+        {
+            onRecordButton = true;
+        }
+        else
+        {
+            onRecordButton = false;
+        }
+    }
+
+
 }
