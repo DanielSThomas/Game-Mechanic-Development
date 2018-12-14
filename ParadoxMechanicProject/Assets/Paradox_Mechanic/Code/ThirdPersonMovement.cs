@@ -82,16 +82,28 @@ public class ThirdPersonMovement : MonoBehaviour
         float _zMovement = Input.GetAxis("Vertical");
         float _xMovement = Input.GetAxis("Horizontal");
 
-        Vector3 _DashVelocity = new Vector3(_xMovement* 9, 0, _zMovement * 10.8f);
+        Vector3 _forward = Camera.main.transform.forward.normalized;
 
-        Vector3 _velocity = new Vector3(_xMovement* speed,0, _zMovement* speed * 1.2f);
+        Vector3 _right = Camera.main.transform.right.normalized;
+
+        Vector3 _verticalMovement = _forward * _zMovement * 1.3f; //Movement compensation
+
+        _verticalMovement.y = 0;
+
+        Vector3 _horizontalMovement = _right * _xMovement;
+
+        Vector3 _velocity = _horizontalMovement + _verticalMovement;
+
+        Vector3 _DashVelocity = _horizontalMovement * 9 + _verticalMovement * 9;
+
+        //Vector3 _velocity = new Vector3(_xMovement* speed,0, _zMovement* speed * 1.3f);
         
         
 
         //Movement
         if (_velocity != Vector3.zero && dashactive == false && crashed == false)
         {
-            rb.MovePosition(rb.position + _velocity * Time.deltaTime);
+            rb.MovePosition(rb.position + _velocity * speed* Time.deltaTime);
             //_lastvel = _velocity;
             _lastvel = _DashVelocity;
 
