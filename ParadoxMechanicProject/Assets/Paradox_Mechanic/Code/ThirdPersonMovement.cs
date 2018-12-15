@@ -150,12 +150,12 @@ public class ThirdPersonMovement : MonoBehaviour
             
             rb.useGravity = false;
             Invoke("DashEnd", 0.15f);
-            Invoke("CooldownEnd", 0.6f);
+            Invoke("CooldownEnd", 0.41f);
             
             dashactive = true;
             cooldown = true;
-            minDashWindow = 0.4f;
-            maxDashWindow = 0.6f;
+            minDashWindow = 0.3f;
+            maxDashWindow = 0.4f;
 
             chainWindow = 0;
             chainActive = true;
@@ -165,14 +165,9 @@ public class ThirdPersonMovement : MonoBehaviour
             speed = 0.1f;
             dashactive = true;
             chainWindow = 0;
-            CancelInvoke();
-            if (minDashWindow > 0.2)
-            {
-                minDashWindow -= 0.02f;
-                maxDashWindow -= 0.02f;
-            }         
+            CancelInvoke();                 
             Invoke("DashEnd", 0.15f);
-            Invoke("CooldownEnd", 0.6f);
+            Invoke("CooldownEnd", 0.4f);
             
         }
         else if (Input.GetButtonDown("Jump") && crashed == false && chainActive == true && chainWindow < minDashWindow)
@@ -192,7 +187,7 @@ public class ThirdPersonMovement : MonoBehaviour
         if (chainActive == true)
         {
             chainWindow += Time.deltaTime;
-            if (chainWindow > 0.7f)
+            if (chainWindow > 0.42f)
             {             
                 chainActive = false;
             }
