@@ -1041,6 +1041,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &647440538 stripped
+Animator:
+  m_PrefabParentObject: {fileID: 9500000, guid: 68d2915a0305e33458fb24664d713e62,
+    type: 3}
+  m_PrefabInternal: {fileID: 188793753}
 --- !u!4 &647440539 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400024, guid: 68d2915a0305e33458fb24664d713e62, type: 3}
@@ -2986,13 +2991,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef070c37874536e46bf8c5505bf9b56a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
+  animator: {fileID: 647440538}
   speed: 5
   jumpForce: 5.5
   raycastMask:
     serializedVersion: 2
     m_Bits: 2049
   Obrenderer: {fileID: 469022853}
+  rbspeed: 0
   chainActive: 0
   chainWindow: 0
 --- !u!54 &1982909405

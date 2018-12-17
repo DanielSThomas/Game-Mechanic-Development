@@ -20,6 +20,10 @@ public class ThirdPersonMovement : MonoBehaviour
     [SerializeField] LayerMask raycastMask;
 
     [SerializeField] Renderer Obrenderer;
+    [SerializeField] float currentspeed;
+
+    private Vector3 lastPos = Vector3.zero;
+
 
     private Rigidbody rb;
 
@@ -45,17 +49,15 @@ public class ThirdPersonMovement : MonoBehaviour
 
         rb = GetComponent<Rigidbody>();
         
-       
-
-
-       
-
     }
 
     // Update------------------------------------------------------------------
     void Update()
     {
-        
+
+
+        SpeedCalc();
+
 
         //Movement
         Movement();
@@ -82,6 +84,10 @@ public class ThirdPersonMovement : MonoBehaviour
         float _zMovement = Input.GetAxis("Vertical");
         float _xMovement = Input.GetAxis("Horizontal");
 
+  
+
+        animator.SetFloat("Velocity", currentspeed);
+
         Vector3 _forward = Camera.main.transform.forward.normalized;
 
         Vector3 _right = Camera.main.transform.right.normalized;
@@ -97,7 +103,7 @@ public class ThirdPersonMovement : MonoBehaviour
         Vector3 _DashVelocity = _horizontalMovement * 9 + _verticalMovement * 9;
 
         //Vector3 _velocity = new Vector3(_xMovement* speed,0, _zMovement* speed * 1.3f);
-        
+
         
 
         //Movement
@@ -106,12 +112,12 @@ public class ThirdPersonMovement : MonoBehaviour
             rb.MovePosition(rb.position + _velocity * speed* Time.deltaTime);
             //_lastvel = _velocity;
             _lastvel = _DashVelocity;
-
+            
 
         }
         else if(dashactive == true && crashed == false)
         {
-           
+            animator.SetTrigger("Dash");
             rb.MovePosition(rb.position + _lastvel * Time.deltaTime * 5);
             
         }
@@ -129,7 +135,13 @@ public class ThirdPersonMovement : MonoBehaviour
 
     }
 
-   
+    private void SpeedCalc()
+    {
+        
+        currentspeed = Vector3.Distance(lastPos, this.transform.position) / Time.deltaTime;
+        lastPos = this.transform.position;
+    }
+
 
     private void Dash()
     {
